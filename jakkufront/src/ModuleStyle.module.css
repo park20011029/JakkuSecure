@@ -1,0 +1,40 @@
+body{
+    background: #E7E8EA;
+}
+.TopbarPage{
+    height: 20vh;
+    width: 100vw;
+}
+
+.CategoriPage{
+    background: #FFFFFF;
+    height: 1000vh;
+    width: 90vw;
+    margin: auto;
+}
+
+.MainPage{
+    background: #FFFFFF;
+    height: auto;
+    width: 90vw;
+    margin: auto;
+}
+
+.ModelPage{
+    background: #FFFFFF;
+    height: auto;
+    width: 90vw;
+    margin: auto;
+    margin-top: 5vh;
+    padding-top: 7vh;
+    padding-bottom: 7vh;
+}
+
+.Model_explain{
+    height: 40vh;
+    width: 90vw; 
+    display: flex; 
+    padding-left: 5vw; 
+    padding-right: 5vw;
+    justify-content: space-between;
+}
