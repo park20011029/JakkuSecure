@@ -1,11 +1,13 @@
 .topbar {
     position: fixed;
+    width: 100vw;
     /*z-index: 1000;*/
     /*height: 10vh;*/
     background-color: white;
     overflow: hidden;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     display: flex;
+    /*overflow: visible;*/
 }
 
 .logo{
@@ -68,14 +70,14 @@
 }
 .notFix {
     display: flex;
+    justify-content: center;
 }
 .notFix > div{
     width: 8vw;
     height: 0.5vh;
     margin-top: 1vh;
     font-size: 1.2vw;
-    text-align: right;
-
+    text-align: center;
 }
 
 .notFix span:hover {
@@ -83,8 +85,3 @@
   border-bottom: 4px solid black;
   padding-bottom: 4px;
 }
-
-.notFix div:first-child{
-    margin-left: 15vw;
-}
-
