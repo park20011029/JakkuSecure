@@ -2,15 +2,18 @@ import React from "react";
 import styled from 'styled-components';
 
 const CategoriTitle = styled.div`
-    font-family: Inter;
-    font-size: 2em;
-    color: #000;
-    padding-top: 6vh;
-    padding-left: 5vw;
+  font-family: Inter;
+  font-size: 2vw;
+  font-weight: bold;
+  color: #000;
+  padding-top: 6vh;
+  padding-left: 6.5vw;
+  margin-bottom: 1vw;
 `;
 
 const Sorted = styled.div`
-    display: flex;
+  margin: 1.3vw;
+  display: flex;
 `;
 
 const BaseStyle = styled.div`
@@ -18,7 +21,7 @@ const BaseStyle = styled.div`
       justify-content: center;
       align-items: center;
       height: 4vh;
-      margin-left: 5vh;
+      margin-left: 2vh;
       border-radius: 20vh;
       background: rgba(217, 217, 217, 0.50);
       text-align: center;
@@ -26,11 +29,8 @@ const BaseStyle = styled.div`
 `;
 
 const SortStyle1 = styled(BaseStyle)`
-    width: 4vw;
-`;
-
-const SortStyle3 = styled(SortStyle1)`
-    margin-left: 10vh;
+    width: 5vw;
+    margin-left: 9vh;
 `;
 
 const SortStyle2 = styled(BaseStyle)`
@@ -40,18 +40,17 @@ const SortStyle2 = styled(BaseStyle)`
 const SortHr = styled.hr`
   background: rgba(0, 0, 0, 0.20);
   width: 85vw;
-  margin: 2vh;
+  margin: auto;
 `;
 
 function Sort() {
   return (
     <>
-      <CategoriTitle>내가 선택한 카테고리</CategoriTitle>
+      <CategoriTitle>상품 목록</CategoriTitle>
       <SortHr />
       <Sorted>
-        <SortStyle3>최신</SortStyle3>
-        <SortStyle1>가격</SortStyle1>
-        <SortStyle2>핫딜값</SortStyle2>
+        <SortStyle1>최신</SortStyle1>
+        <SortStyle2>가격</SortStyle2>
       </Sorted>
       <SortHr />
     </>

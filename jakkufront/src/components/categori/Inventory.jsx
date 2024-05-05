@@ -11,6 +11,7 @@ const SortHr = styled.hr`
 const InventroyComponent = styled.div`
   display: flex;
   width: 90vw;
+  justify-content: space-evenly;
 `;
 
 const ItemImageBox = styled.div`
@@ -30,14 +31,14 @@ const ItemImage = styled.img`
 const ItemDetail = styled.div`
   width: 30vw;
   margin-top: 4vw;
-  margin-left: 6vw;
+  margin-right: 5vw;
 `;
 
 const ItemTitle = styled.div`
   color: rgba(0, 0, 0, 0.80);
   display: flex;
   font-family: Inter;
-  font-size: 1vw;
+  font-size: 1.5vw;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -59,8 +60,12 @@ const ItemPrice =styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-top: 2vw;
+  margin-top: 0.5vw;
 `;
+
+const ItemNumber = styled.div`
+  margin-top: 7.5vw;
+`
 
 const HotdealImage = styled.img`
   width: 3vw;
@@ -114,6 +119,25 @@ const Icon = styled.div`
   text-decoration-line: underline;
 `;
 
+const ItemPutIn = styled.div`
+  display: flex;
+  margin-top: 1vw;
+`
+
+const BaseStyle = styled.div`
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 3vh;
+      margin-left: 2vh;
+      border-radius: 20vh;
+      background: rgba(217, 217, 217, 0.50);
+      text-align: center;
+`;
+
+const SortStyle = styled(BaseStyle)`
+    width: 4vw;
+`;
 
 function Inventory(){
     return(
@@ -125,30 +149,22 @@ function Inventory(){
                 <ItemDetail>
                     <ItemTitle>
                         1000R 커브드 모니터LC32T5  52FDKXKR
-                        <Icon>
-                            <LiaCommentDots size="2vw"/> 5
-                        </Icon>
                     </ItemTitle>
-                    <ItemDescription>
-                        이걸 시키면 게임 실력향상
-                    </ItemDescription>
                     <ItemPrice>
                         KRW152,512~KRW156,564
                     </ItemPrice>
-                    <Deadline>
-                        <HotdealImage src="https://projectmanager4.s3.ap-northeast-2.amazonaws.com/hot-deal+1.svg" alt="로고"/>
-                        ~12/30
-                    </Deadline>
+                    <ItemNumber>
+                        남은 수량 : 15개
+                    </ItemNumber>
+                    <ItemPutIn>
+                        <>
+                            숫자박스
+                        </>
+                        <SortStyle>
+                            담기
+                        </SortStyle>
+                    </ItemPutIn>
                 </ItemDetail>
-                <Store>
-                    판매처
-                    <div>
-                        <ElLogo src="https://projectmanager4.s3.ap-northeast-2.amazonaws.com/11%EB%B2%88%EA%B0%80.svg"/>
-                    </div>
-                    <div>
-                        <CoupangLogo src="https://projectmanager4.s3.ap-northeast-2.amazonaws.com/coupang.svg"/>
-                    </div>=
-                </Store>
             </InventroyComponent>
             <SortHr/>
 
@@ -161,20 +177,10 @@ function Inventory(){
                     <ItemTitle>
                         1000R 커브드 모니터LC32T5  52FDKXKR
                     </ItemTitle>
-                    <ItemDescription>
-                        이걸 시키면 게임 실력향상
-                    </ItemDescription>
                     <ItemPrice>
                         KRW152,512~KRW156,564
                     </ItemPrice>
-                    <Deadline>
-                        <HotdealImage src="https://projectmanager4.s3.ap-northeast-2.amazonaws.com/hot-deal+1.svg" alt="로고"/>
-                        ~12/30
-                    </Deadline>
                 </ItemDetail>
-                <Store>
-                    판매처
-                </Store>
             </InventroyComponent>
             <SortHr/>
         </>
