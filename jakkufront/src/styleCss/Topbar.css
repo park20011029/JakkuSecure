@@ -72,16 +72,24 @@
     display: flex;
     justify-content: center;
 }
-.notFix > div{
+.notFix > a {
+    text-decoration: none; /* 링크 텍스트에 밑줄 제거 */
+    color: inherit; /* 링크의 색상을 상위 요소로부터 상속 */
+}
+.notFix > a > div{
     width: 8vw;
     height: 0.5vh;
     margin-top: 1vh;
     font-size: 1.2vw;
     text-align: center;
 }
-
 .notFix span:hover {
   display: inline-block;
   border-bottom: 4px solid black;
   padding-bottom: 4px;
+}
+.clicked {
+    display: inline-block;
+    border-bottom: 4px solid black;
+    padding-bottom: 4px;
 }
