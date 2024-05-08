@@ -1,5 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
+import { pageState } from '../atoms/atom';
 
 const CategoriTitle = styled.div`
   font-family: Inter;
@@ -44,17 +46,25 @@ const SortHr = styled.hr`
 `;
 
 function Sort() {
-  return (
-    <>
-      <CategoriTitle>상품 목록</CategoriTitle>
-      <SortHr />
-      <Sorted>
-        <SortStyle1>최신</SortStyle1>
-        <SortStyle2>가격</SortStyle2>
-      </Sorted>
-      <SortHr />
-    </>
-  );
+    const page = useRecoilValue(pageState);
+
+    return (
+        <>
+            <CategoriTitle>
+                {page === 0 ? '상품목록' : page === 1 ? '장바구니' : '내 구매 내역'}
+            </CategoriTitle>
+            <SortHr />
+            <Sorted>
+                <SortStyle1>
+                    {page === 0 ? '최신' : page === 1 ? '수량' : '최신'}
+                </SortStyle1>
+                <SortStyle2>
+                    {page === 0 ? '가격' : page === 1 ? '가격' : '상태'}
+                </SortStyle2>
+            </Sorted>
+            <SortHr />
+        </>
+    );
 }
 
 export default Sort;
