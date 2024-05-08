@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { LiaCommentDots } from "react-icons/lia";
+import NumberBox from "../button/NumberBox";
 
 const SortHr = styled.hr`
   background: rgba(0, 0, 0, 0.20);
@@ -44,15 +44,6 @@ const ItemTitle = styled.div`
   line-height: normal;
 `;
 
-const ItemDescription = styled.div`
-  color: rgba(0, 0, 0, 0.50);
-  font-family: Inter;
-  font-size: 0.8vw;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-`;
-
 const ItemPrice =styled.div`
   color: #000;
   font-family: Inter;
@@ -66,59 +57,6 @@ const ItemPrice =styled.div`
 const ItemNumber = styled.div`
   margin-top: 7.5vw;
 `
-
-const HotdealImage = styled.img`
-  width: 3vw;
-  height: 3vh;
-  margin-right: -0.5vw;
-  margin-left: -0.9vw;
-`;
-
-const Deadline = styled.div`
-  color: rgba(0, 0, 0, 0.60);
-  font-family: Inter;
-  font-size: 1.1vw;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-`;
-
-const Store = styled.div`
-  float: left;
-  margin-left: 7vw;
-  margin-top: 4vw;
-  color: rgba(0, 0, 0, 0.60);
-  font-family: Inter;
-  font-size: 1vw;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  text-decoration-line: underline;
-`;
-
-const ElLogo = styled.img`
-  margin-top: 1vw;
-  width: 2vw;
-  height: 2vw;
-`;
-
-const CoupangLogo = styled.img`
-  margin-top: 1vw;
-  width: 4vw;
-  height: 2vh;
-`;
-
-const Icon = styled.div`
-  margin-left: 0.5vw;
-  margin-top: -0.2vw;
-  text-align: center;
-  display: flex;
-  width: 2.3vw;
-  height: 2.3vh;
-  font-size: 1vw;
-  text-decoration-line: underline;
-`;
-
 const ItemPutIn = styled.div`
   display: flex;
   margin-top: 1vw;
@@ -144,7 +82,7 @@ function Inventory(){
         <>
             <InventroyComponent>
                 <ItemImageBox>
-                    <ItemImage className="logoImg" src="https://projectmanager4.s3.ap-northeast-2.amazonaws.com/image+26.svg" alt="로고"/>
+                    <ItemImage className="logoImg" src="https://secure-project-s3bucket.s3.ap-northeast-2.amazonaws.com/secure-project-front-image/ex_item.svg" alt="로고"/>
                 </ItemImageBox>
                 <ItemDetail>
                     <ItemTitle>
@@ -157,9 +95,7 @@ function Inventory(){
                         남은 수량 : 15개
                     </ItemNumber>
                     <ItemPutIn>
-                        <>
-                            숫자박스
-                        </>
+                        <NumberBox/>
                         <SortStyle>
                             담기
                         </SortStyle>
