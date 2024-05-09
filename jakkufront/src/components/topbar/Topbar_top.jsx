@@ -1,40 +1,44 @@
 import React, {useState, useEffect} from "react";
+import { useRecoilState } from 'recoil';
 import "../../styleCss/Topbar.css";
+import { modalState } from '../../atoms/atom';
 
 function Topbar_top() {
-          const [isFixed, setIsFixed] = useState(false);
+    const [isFixed, setIsFixed] = useState(false);
 
-          const handleScroll = () => {
-            const position = window.pageYOffset;
-            setIsFixed(position > 10);
-          };
+    const [isOpen, setIsOpen] = useRecoilState(modalState);
 
-          useEffect(() => {
-            window.addEventListener('scroll', handleScroll);
+    const openModal = () => {
+        setIsOpen(true);
+    };
 
-            return () => {
-              window.removeEventListener('scroll', handleScroll);
-            };
-          }, []);
+    const handleScroll = () => {
+        const position = window.pageYOffset;
+        setIsFixed(position > 10);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+        }, []);
 
     return (
         <div class="topbar"  style={{ position: isFixed ? 'fixed' : 'static', top: isFixed ? '0' : '0' }}>
                 <div class="logo">
-                    <img class="logoImg" src="https://projectmanager4.s3.ap-northeast-2.amazonaws.com/logo_fix.svg" alt="로고"/>
+                    <img class="logoImg" src="https://secure-project-s3bucket.s3.ap-northeast-2.amazonaws.com/secure-project-front-image/logo_fix+(1).svg" alt="로고"/>
                 </div>
                 <div class="search_bar">
                     <div class="search_text">
                         <input type="text" placeholder="search"/>
                     </div>
                     <div class="search_btn">
-                        <img src="https://projectmanager4.s3.ap-northeast-2.amazonaws.com/search_parkmin.svg" alt="로고"/>
+                        <img src="https://secure-project-s3bucket.s3.ap-northeast-2.amazonaws.com/secure-project-front-image/search-13-128+1.svg" alt="로고"/>
                     </div>
                 </div>
-                <div class="search_btn">
-                        <img src="https://projectmanager4.s3.ap-northeast-2.amazonaws.com/search_parkmin.svg" alt="로고"/>
-                </div>
-                <div class="profile_btn">
-                        <img src="https://projectmanager4.s3.ap-northeast-2.amazonaws.com/user+1.svg" alt="로고"/>
+                <div class="profile_btn" onClick={openModal}>
+                    <img src="https://secure-project-s3bucket.s3.ap-northeast-2.amazonaws.com/secure-project-front-image/user+1+(1).svg" alt="로고"/>
                 </div>
         </div>
     )

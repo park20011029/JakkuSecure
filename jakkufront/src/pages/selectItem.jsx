@@ -1,6 +1,6 @@
 import React from "react";
 import ModuleStyle from "../ModuleStyle.module.css";
-import Sort from "../components/categori/Sort";
+import Sort from "../components/Sort";
 import Inventory from "../components/categori/Inventory";
 
 function SelectItem() {

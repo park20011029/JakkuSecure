@@ -1,22 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
 import Topbar from "./pages/Topbar";
-import {BrowserRouter as Router, Routes, Route, Navigate, useLocation, BrowserRouter} from 'react-router-dom';
+import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import SelectItem from "./pages/selectItem";
-import Footer from "./components/Footer";
+import Footer from "./pages/Footer";
+import Bucket from "./pages/Bucket";
+import Buylist from "./pages/Buylist";
+import { RecoilRoot } from "recoil";
+import Modal from "./components/Usermodal";
+import React from "react";
 
 
 function App() {
   return (
-      <>
-        <Topbar/>
+      <RecoilRoot>
+          <Modal/>
         <BrowserRouter>
+          <Topbar/>
           <Routes>
-            <Route path="/categori" element={<SelectItem/>}/>
+              <Route path="/categori" element={<SelectItem/>}/>
+              <Route path="/bucket" element={<Bucket/>}/>
+              <Route path="/buylist" element={<Buylist/>}/>
           </Routes>
+          <Footer/>
         </BrowserRouter>
-        <Footer/>
-      </>
+      </RecoilRoot>
   );
 }
 
