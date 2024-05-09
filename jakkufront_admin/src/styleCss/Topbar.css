@@ -1,0 +1,95 @@
+.topbar {
+    position: fixed;
+    width: 100vw;
+    /*z-index: 1000;*/
+    /*height: 10vh;*/
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    /*overflow: visible;*/
+}
+
+.logo{
+    width: 15vw;
+    margin-left: 4vw;
+}
+.logo img{
+    height: 10vh;
+}
+
+.search_bar{
+    margin-top: 1vh;
+    margin-left: 3vh;
+    border-radius: 1vw;
+    background: black;
+    width: 60vw;
+    height: 8vh;
+    display: flex;
+}
+.search_text input{
+    margin-bottom: 0.01vw;
+}
+.search_text input{
+    margin-left: 2vw;
+    margin-top: 1vw;
+    background: black;
+    border-radius: 1vw;
+    width: 55vw;
+    height: 4vh;
+    color: white;
+    font-size: 1.7em;
+    border: none;
+}
+
+.search_text input:focus {
+    outline: none;
+}
+
+.search_text::placeholder{
+    color: white;
+    font-size: 5pt;
+}
+.search_btn{
+    height: 8vh;
+    margin-top: 2vh;
+    margin-right: 2vw;
+    text-align: right;
+}
+
+.profile_btn {
+    height: 8vh;
+    margin-top: 1.5vh;
+    margin-left: 9vw;
+    text-align: right;
+
+}
+.profile_btn img{
+    height: 6vh;
+    width: 6vh;
+}
+.notFix {
+    display: flex;
+    justify-content: center;
+}
+.notFix > a {
+    text-decoration: none; /* 링크 텍스트에 밑줄 제거 */
+    color: inherit; /* 링크의 색상을 상위 요소로부터 상속 */
+}
+.notFix > a > div{
+    width: 8vw;
+    height: 0.5vh;
+    margin-top: 1vh;
+    font-size: 1.2vw;
+    text-align: center;
+}
+.notFix span:hover {
+  display: inline-block;
+  border-bottom: 4px solid black;
+  padding-bottom: 4px;
+}
+.clicked {
+    display: inline-block;
+    border-bottom: 4px solid black;
+    padding-bottom: 4px;
+}
