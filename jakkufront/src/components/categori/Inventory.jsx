@@ -82,7 +82,7 @@ function Inventory(){
         <>
             <InventroyComponent>
                 <ItemImageBox>
-                    <ItemImage className="logoImg" src="https://secure-project-s3bucket.s3.ap-northeast-2.amazonaws.com/secure-project-front-image/ex_item.svg" alt="로고"/>
+                    <ItemImage className="logoImg" src="https://secure-project-dev-image.s3.ap-northeast-2.amazonaws.com/secure-project-front-image/ex_item.svg" alt="로고"/>
                 </ItemImageBox>
                 <ItemDetail>
                     <ItemTitle>
@@ -107,7 +107,7 @@ function Inventory(){
 
             <InventroyComponent>
                 <ItemImageBox>
-                    <ItemImage className="logoImg" src="https://projectmanager4.s3.ap-northeast-2.amazonaws.com/image+26.svg" alt="로고"/>
+                    <ItemImage className="logoImg" src="https://secure-project-dev-image.s3.ap-northeast-2.amazonaws.com/secure-project-front-image/ex_item.svg" alt="로고"/>
                 </ItemImageBox>
                 <ItemDetail>
                     <ItemTitle>
