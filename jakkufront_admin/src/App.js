@@ -17,9 +17,7 @@ function App() {
         <BrowserRouter>
           <Topbar/>
           <Routes>
-              <Route path="/categori" element={<SelectItem/>}/>
-              <Route path="/bucket" element={<Bucket/>}/>
-              <Route path="/buylist" element={<Buylist/>}/>
+
           </Routes>
           <Footer/>
         </BrowserRouter>
