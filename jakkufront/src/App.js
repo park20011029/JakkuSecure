@@ -1,7 +1,8 @@
 import './App.css';
 import Topbar from "./pages/Topbar";
-import {Routes, Route, BrowserRouter} from 'react-router-dom';
+import {Routes, Route, BrowserRouter, useLocation} from 'react-router-dom';
 import SelectItem from "./pages/selectItem";
+import Login from "./pages/Login"
 import Footer from "./pages/Footer";
 import Bucket from "./pages/Bucket";
 import Buylist from "./pages/Buylist";
@@ -10,21 +11,37 @@ import Modal from "./components/Usermodal";
 import React from "react";
 
 
+
 function App() {
   return (
       <RecoilRoot>
           <Modal/>
         <BrowserRouter>
-          <Topbar/>
-          <Routes>
-              <Route path="/categori" element={<SelectItem/>}/>
-              <Route path="/bucket" element={<Bucket/>}/>
-              <Route path="/buylist" element={<Buylist/>}/>
-          </Routes>
-          <Footer/>
+            <AppContent/>
         </BrowserRouter>
       </RecoilRoot>
   );
+}
+function AppContent() {
+    const location = useLocation();
+    const isLoginPage1 = location.pathname === "/";
+
+    return (
+        <>
+            {(!isLoginPage1) && (
+                <Topbar/>
+            )}
+            <Routes>
+                <Route path="/" element={<Login/>}/>
+                <Route path="/categori" element={<SelectItem/>}/>
+                <Route path="/bucket" element={<Bucket/>}/>
+                <Route path="/buylist" element={<Buylist/>}/>
+            </Routes>
+            {(!isLoginPage1) && (
+                <Footer/>
+            )}
+        </>
+    );
 }
 
 export default App;
