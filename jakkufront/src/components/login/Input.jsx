@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "../button/Button";
+import {Link} from "react-router-dom";
 
 const BoxList = styled.div`
   display: flex;
@@ -50,13 +51,14 @@ const Button_signup = styled(Button)`
   font-size: 1.5vw;
 `
 
+
 function Input() {
     return(
         <BoxList>
             <TextBox placeholder="ID"/>
             <TextBox placeholder="Password" type="password"/>
             <Button_login>로그인</Button_login>
-            <Button_signup>회원가입</Button_signup>
+            <Link to='/signup'><Button_signup>회원가입</Button_signup></Link>
         </BoxList>
     )
 }
