@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import {useRecoilState} from "recoil";
-import {countState} from "../../atoms/atom";
+import {countState, buycountState} from "../../atoms/atom";
+import {useLocation} from "react-router-dom";
 
 const CountBox = styled.div`
   display: flex;
@@ -49,14 +50,31 @@ const Textbox = styled.span`
 `
 
 function NumberBox(){
+    const location = useLocation();
+    const iscategoriPage1 = location.pathname === "/categori";
+
     const [count, setCount] = useRecoilState(countState);
 
+    const [buy_count, setbuyCount] = useRecoilState(buycountState);
+
     return (
-        <CountBox>
-            <Btn onClick={() => count > 0 && setCount(prevCount => prevCount - 1)}>-</Btn>
-            <Textbox>{count}</Textbox>
-            <Btn onClick={() => setCount(prevCount => prevCount + 1)}>+</Btn>
-        </CountBox>
+        <>
+            {(!iscategoriPage1) && (
+                <CountBox>
+                    <Btn onClick={() => count > 0 && setCount(prevCount => prevCount - 1)}>-</Btn>
+                    <Textbox>{count}</Textbox>
+                    <Btn onClick={() => setCount(prevCount => prevCount + 1)}>+</Btn>
+                </CountBox>
+            )}
+
+            {(iscategoriPage1) && (
+                <CountBox>
+                    <Btn onClick={() => buy_count > 0 && setbuyCount(prevCount => prevCount - 1)}>-</Btn>
+                    <Textbox>{buy_count}</Textbox>
+                    <Btn onClick={() => setbuyCount(prevCount => prevCount + 1)}>+</Btn>
+                </CountBox>
+            )}
+        </>
     );
 }
 export default NumberBox;
