@@ -16,6 +16,7 @@ const PasswordBox = styled.div`
 const InputBox = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 1vw;
 `
 
@@ -65,19 +66,19 @@ function UserPassword() {
                     <Namecontent>
                         기존 비밀번호
                     </Namecontent>
-                    <TextBox placeholder="Password"/>
+                    <TextBox type="password" placeholder="Password"/>
                 </InputBox>
                 <InputBox>
                     <Namecontent>
                         새 비밀번호
                     </Namecontent>
-                    <TextBox placeholder="New Password"/>
+                    <TextBox type="password" placeholder="New Password"/>
                 </InputBox>
                 <InputBox>
                     <Namecontent>
                         새 비밀번호 확인
                     </Namecontent>
-                    <TextBox placeholder="New Password"/>
+                    <TextBox type="password" placeholder="New Password"/>
                 </InputBox>
             </PasswordBox>
             <ButtonBox>

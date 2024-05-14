@@ -4,7 +4,7 @@ import Button from "../button/Button";
 
 const SortHr = styled.hr`
   background: rgba(0, 0, 0, 0.20);
-  width: 80vw;
+  width: 95%;
   margin: auto;
 `;
 
@@ -34,14 +34,13 @@ const BuyDate = styled.div`
 const InventroyComponent = styled.div`
   display: flex;
   width: 80vw;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 const ItemImageBox = styled.div`
   width: 20vw;
   height: 30vh;
-  margin: 3vw;
-  margin-left: 8vw;
+  margin: 3vw 3vw 3vw 8vw;
   background: rgba(217, 217, 217, 0.2);
   border-radius: 2vw;
 `;
@@ -54,7 +53,6 @@ const ItemImage = styled.img`
 const ItemDetail = styled.div`
   width: auto;
   margin-top: 4vw;
-  margin-right: 5vw;
 `;
 
 const ItemTitle = styled.div`
@@ -93,6 +91,7 @@ const BuyDetail = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   margin-bottom: 2vw;
+  margin-right: 2vw;
   width: 8vw;
 `;
 
@@ -141,7 +140,7 @@ function BuyItem() {
                 </ItemDetail>
                 <BuyDetail>
                     <Button>상세보기</Button>
-                    <Refund>환불</Refund>
+                    <Refund>주문 취소</Refund>
                 </BuyDetail>
             </InventroyComponent>
             <SortHr/>

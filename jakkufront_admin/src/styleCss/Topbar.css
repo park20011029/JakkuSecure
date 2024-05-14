@@ -80,6 +80,8 @@
     width: 8vw;
     height: 0.5vh;
     margin-top: 1vh;
+    margin-left: 8vw;
+    margin-right: 8vw;
     font-size: 1.2vw;
     text-align: center;
 }

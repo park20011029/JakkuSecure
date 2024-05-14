@@ -17,8 +17,7 @@ const InventroyComponent = styled.div`
 const ItemImageBox = styled.div`
   width: 20vw;
   height: 30vh;
-  margin: 3vw;
-  margin-left: 8vw;
+  margin: 3vw 3vw 3vw 8vw;
   background: rgba(217, 217, 217, 0.2);
   border-radius: 2vw;
 `;
@@ -74,7 +73,7 @@ const BaseStyle = styled.div`
 `;
 
 const SortStyle = styled(BaseStyle)`
-    width: 4vw;
+    width: 6vw;
 `;
 
 function Inventory(){
@@ -97,7 +96,7 @@ function Inventory(){
                     <ItemPutIn>
                         <NumberBox/>
                         <SortStyle>
-                            담기
+                            수량 추가
                         </SortStyle>
                     </ItemPutIn>
                 </ItemDetail>
