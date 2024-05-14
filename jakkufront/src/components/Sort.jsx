@@ -4,7 +4,6 @@ import { useRecoilValue } from 'recoil';
 import { pageState } from '../atoms/atom';
 
 const CategoriTitle = styled.div`
-  font-family: Inter;
   font-size: 2vw;
   font-weight: bold;
   color: #000;
@@ -18,16 +17,21 @@ const Sorted = styled.div`
   display: flex;
 `;
 
-const BaseStyle = styled.div`
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 4vh;
-      margin-left: 2vh;
-      border-radius: 20vh;
-      background: rgba(217, 217, 217, 0.50);
-      text-align: center;
-      font-weight: 600;
+const BaseStyle = styled.button`
+  height: 4vh;
+  margin-left: 2vh;
+  border-radius: 20vh;
+  border: none;
+  font-weight: 600;
+  font-size: 0.9vw;
+  
+  background: rgba(217, 217, 217, 0.7);
+  &:hover{
+    background: rgba(217, 217, 217, 0.5);
+  }
+  &:active{
+    background: rgba(217, 217, 217, 0.3);
+  }
 `;
 
 const SortStyle1 = styled(BaseStyle)`
@@ -41,7 +45,7 @@ const SortStyle2 = styled(BaseStyle)`
 
 const SortHr = styled.hr`
   background: rgba(0, 0, 0, 0.20);
-  width: 85vw;
+  width: 95%;
   margin: auto;
 `;
 

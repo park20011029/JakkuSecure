@@ -12,6 +12,13 @@ body{
     margin: auto;
 }
 
+.BuylistPage{
+    background: #FFFFFF;
+    height: 1000vh;
+    width: 80vw;
+    margin: auto;
+}
+
 .LoginPage{
     background: #FFFFFF;
     height: 90vh;

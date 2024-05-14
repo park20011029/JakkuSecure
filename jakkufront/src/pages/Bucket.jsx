@@ -15,10 +15,9 @@ const Itemtool = styled.div`
 
 const Buytool = styled.div`
   width: auto;
-  z-index: auto;
 `
 
-function SelectItem() {
+function Bucket() {
     return(
         <div className={ModuleStyle.CategoriPage}>
             <Sort/>
@@ -34,4 +33,4 @@ function SelectItem() {
     )
 }
 
-export default SelectItem;
+export default Bucket;

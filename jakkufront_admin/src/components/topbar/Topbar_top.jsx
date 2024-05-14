@@ -6,12 +6,6 @@ import { modalState } from '../../atoms/atom';
 function Topbar_top() {
     const [isFixed, setIsFixed] = useState(false);
 
-    const [isOpen, setIsOpen] = useRecoilState(modalState);
-
-    const openModal = () => {
-        setIsOpen(true);
-    };
-
     const handleScroll = () => {
         const position = window.pageYOffset;
         setIsFixed(position > 10);
@@ -37,7 +31,7 @@ function Topbar_top() {
                         <img src="https://secure-project-dev-image.s3.ap-northeast-2.amazonaws.com/secure-project-front-image/search-13-128+1.svg" alt="로고"/>
                     </div>
                 </div>
-                <div class="profile_btn" onClick={openModal}>
+                <div class="profile_btn">
                     <img src="https://secure-project-dev-image.s3.ap-northeast-2.amazonaws.com/secure-project-front-image/user+1+(1).svg" alt="로고"/>
                 </div>
         </div>

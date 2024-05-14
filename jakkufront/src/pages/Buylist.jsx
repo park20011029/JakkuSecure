@@ -7,9 +7,9 @@ import BuyItem from "../components/buylist/BuyItem";
 const Maintool = styled.div`
 `
 
-function SelectItem() {
+function Buylist() {
     return(
-        <div className={ModuleStyle.CategoriPage}>
+        <div className={ModuleStyle.BuylistPage}>
             <Sort/>
             <Maintool>
                 <BuyItem/>
@@ -18,4 +18,4 @@ function SelectItem() {
     )
 }
 
-export default SelectItem;
+export default Buylist;

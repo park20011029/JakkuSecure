@@ -8,7 +8,7 @@ const BoxList = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 10vh;
+  margin-top: 5vh;
 `
 
 const TextBox = styled.input`
@@ -24,7 +24,7 @@ const TextBox = styled.input`
   font-size: 1.5vw;
 `
 
-const Button_login = styled(Button)`
+const Button_sign = styled(Button)`
   width : 23vw;
   height: 5vh;
   margin: 1vw;
@@ -32,33 +32,14 @@ const Button_login = styled(Button)`
   font-size: 1.5vw;
 `
 
-const Button_signup = styled(Button)`
-  background-color: darkgray;
-
-  &:hover {
-    background: rgb(168, 168, 168, 0.8);
-  }
-
-  &:active {
-    background: rgba(168, 168, 168, 0.2);
-  }
-
-  width: 23vw;
-  height: 5vh;
-  margin: 1vw;
-
-  color: black;
-  font-size: 1.5vw;
-`
-
-
 function Input() {
     return(
         <BoxList>
+            <TextBox placeholder="NickName"/>
             <TextBox placeholder="ID"/>
             <TextBox placeholder="Password" type="password"/>
-            <Button_login>로그인</Button_login>
-            <Link to='/signup'><Button_signup>회원가입</Button_signup></Link>
+            <TextBox placeholder="Password Check" type="password"/>
+            <Button_sign>회원가입</Button_sign>
         </BoxList>
     )
 }

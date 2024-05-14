@@ -1,7 +1,14 @@
 import React from "react";
 import styled from 'styled-components';
-import { useRecoilValue } from 'recoil';
-import { pageState } from '../atoms/atom';
+import {useRecoilState, useRecoilValue} from 'recoil';
+import {modalState, pageState} from '../atoms/atom';
+import Button from './itemlist/PlusItem';
+import {useLocation} from "react-router-dom";
+
+const Arraylist = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 const CategoriTitle = styled.div`
   font-family: Inter;
@@ -41,25 +48,62 @@ const SortStyle2 = styled(BaseStyle)`
 
 const SortHr = styled.hr`
   background: rgba(0, 0, 0, 0.20);
-  width: 85vw;
+  width: 95%;
   margin: auto;
+`;
+
+const PlusItem = styled(Button)`
+  background-color: rgba(217, 217, 217, 0.6);
+
+  &:hover {
+    background: rgba(217, 217, 217, 0.3);
+  }
+
+  &:active {
+    background: rgba(217, 217, 217, 0.1);
+  }
+
+  width: 10vw;
+  height: 5vh;
+  margin-top: 7vh;
+  margin-right: 4vw;
+
+  color: black;
+  font-size: 1.5vw;
 `;
 
 function Sort() {
     const page = useRecoilValue(pageState);
 
+    const location = useLocation();
+    const isListPage1 = location.pathname === "/list";
+
+    const [isOpen, setIsOpen] = useRecoilState(modalState);
+
+    const openModal = () => {
+        setIsOpen(true);
+    };
+
     return (
         <>
-            <CategoriTitle>
-                {page === 0 ? '상품목록' : page === 1 ? '장바구니' : '내 구매 내역'}
-            </CategoriTitle>
+            <Arraylist>
+                <CategoriTitle>
+                    {page === 0 ? '상품목록' : '픽업 관리'}
+                </CategoriTitle>
+
+                {(isListPage1) && (
+                    <PlusItem onClick={openModal}>상품 추가</PlusItem>
+                )}
+
+            </Arraylist>
+
             <SortHr />
             <Sorted>
                 <SortStyle1>
-                    {page === 0 ? '최신' : page === 1 ? '수량' : '최신'}
+                    {page === 0 ? '수량' : '최신'}
                 </SortStyle1>
                 <SortStyle2>
-                    {page === 0 ? '가격' : page === 1 ? '가격' : '상태'}
+                    {page === 0 ? '등록일자' : '상태'}
                 </SortStyle2>
             </Sorted>
             <SortHr />
