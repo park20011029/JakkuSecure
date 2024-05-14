@@ -5,11 +5,6 @@ export const countState = atom({
     default: 0,
 });
 
-export const buycountState = atom({
-    key: 'buycountState',
-    default: 0,
-});
-
 export const priceState = atom({
     key: 'priceState',
     default: 100000, // 물건의 가격
