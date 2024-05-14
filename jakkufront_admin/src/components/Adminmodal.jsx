@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import { useRecoilState } from 'recoil';
 import { modalState } from '../atoms/atom';
 import "../styleCss/Modal.css";
-import Usermoney from "./modal/Usermoney";
-import Username from "./modal/Username";
-import UserPassword from "./modal/UserPassword";
+import AdminImg from "./modal/AdminImg";
+import Admincontent from "./modal/Admincontent";
 
 function Modal() {
     const [isOpen, setIsOpen] = useRecoilState(modalState);
@@ -29,9 +28,8 @@ function Modal() {
                 <div className="modal-overlay" onClick={handleOverlayClick}>
                     <div className="modal">
                         <div className="modal-content">
-                            <Usermoney/>
-                            <Username/>
-                            <UserPassword/>
+                            <AdminImg/>
+                            <Admincontent/>
                         </div>
                     </div>
                 </div>
