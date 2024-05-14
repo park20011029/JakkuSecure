@@ -1,7 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
-import {useRecoilState} from "recoil";
-import {countState} from "../../atoms/atom";
 
 const CountBox = styled.div`
   display: flex;
@@ -49,13 +47,23 @@ const Textbox = styled.span`
 `
 
 function NumberBox(){
-    const [count, setCount] = useRecoilState(countState);
+    const [count, setCount] = useState(0);
+
+    const decrementCount = () => {
+        if (count > 0) {
+            setCount(prevCount => prevCount - 1);
+        }
+    };
+
+    const incrementCount = () => {
+        setCount(prevCount => prevCount + 1);
+    };
 
     return (
         <CountBox>
-            <Btn onClick={() => count > 0 && setCount(prevCount => prevCount - 1)}>-</Btn>
+            <Btn onClick={decrementCount}>-</Btn>
             <Textbox>{count}</Textbox>
-            <Btn onClick={() => setCount(prevCount => prevCount + 1)}>+</Btn>
+            <Btn onClick={incrementCount}>+</Btn>
         </CountBox>
     );
 }

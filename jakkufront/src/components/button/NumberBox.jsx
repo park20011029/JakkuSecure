@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import {useRecoilState} from "recoil";
-import {countState, buycountState} from "../../atoms/atom";
+import {countState} from "../../atoms/atom";
 import {useLocation} from "react-router-dom";
 
 const CountBox = styled.div`
@@ -55,7 +55,7 @@ function NumberBox(){
 
     const [count, setCount] = useRecoilState(countState);
 
-    const [buy_count, setbuyCount] = useRecoilState(buycountState);
+    const [buy_count, setbuyCount] = useState(0);
 
     return (
         <>
