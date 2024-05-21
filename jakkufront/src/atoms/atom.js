@@ -24,3 +24,8 @@ export const usermoneyState = atom({
     key: 'usermoneyState',
     default: 50000000,
 });
+
+export const basketItemsState = atom({
+    key: 'basketItemsState',
+    default: [],
+});
