@@ -49,32 +49,31 @@ const Textbox = styled.span`
   justify-content: center;
 `
 
-function NumberBox(){
+function NumberBox({ value, onChange }) {
     const location = useLocation();
     const iscategoriPage1 = location.pathname === "/categori";
 
-    const [count, setCount] = useRecoilState(countState);
+    const handleIncrement = () => {
+        onChange(value + 1);
+    };
 
-    const [buy_count, setbuyCount] = useState(0);
+    const handleDecrement = () => {
+        if (value > 0) {
+            onChange(value - 1);
+        }
+    };
 
     return (
-        <>
-            {(!iscategoriPage1) && (
-                <CountBox>
-                    <Btn onClick={() => count > 0 && setCount(prevCount => prevCount - 1)}>-</Btn>
-                    <Textbox>{count}</Textbox>
-                    <Btn onClick={() => setCount(prevCount => prevCount + 1)}>+</Btn>
-                </CountBox>
-            )}
-
-            {(iscategoriPage1) && (
-                <CountBox>
-                    <Btn onClick={() => buy_count > 0 && setbuyCount(prevCount => prevCount - 1)}>-</Btn>
-                    <Textbox>{buy_count}</Textbox>
-                    <Btn onClick={() => setbuyCount(prevCount => prevCount + 1)}>+</Btn>
-                </CountBox>
-            )}
-        </>
+        <CountBox>
+            <Btn onClick={handleDecrement}>-</Btn>
+            <Textbox>{value}</Textbox>
+            <Btn onClick={handleIncrement}>+</Btn>
+        </CountBox>
     );
 }
+
+NumberBox.defaultProps = {
+    value: 1
+};
+
 export default NumberBox;

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import NumberBox from "../button/NumberBox";
+import axios from "axios";
 
 const SortHr = styled.hr`
   background: rgba(0, 0, 0, 0.20);
@@ -83,37 +84,67 @@ const SortStyle = styled(BaseStyle)`
     width: 4vw;
 `
 
-function Inventory(){
-    return(
+function Inventory({items}) {
+
+    const [quantities, setQuantities] = useState({});
+
+    const handleQuantityChange = (itemId, quantity) => {
+        setQuantities(prevQuantities => ({
+            ...prevQuantities,
+            [itemId]: quantity
+        }));
+    };
+
+    const handleAddToBasket = async (itemId) => {
+        try {
+            const response = await axios.post('/customers/addItem', {
+                userId: 1,
+                itemId: itemId,
+                itemAmount: quantities[itemId]
+            });
+            if (response.data.success) {
+                alert("상품이 장바구니에 담겼습니다.");
+            }
+        } catch (error) {
+            alert("담기 에러 발생");
+        }
+    };
+
+    return (
         <>
-            <ComponentBox>
-                <ItemImageBox>
-                    <ItemImage className="logoImg"
-                               src="https://secure-project-dev-image.s3.ap-northeast-2.amazonaws.com/secure-project-front-image/ex_item.svg"
-                               alt="로고"/>
-                </ItemImageBox>
-                <ItemDetail>
-                    <ItemTitle>
-                        1000R 커브드 모니터LC32T5 52FDKXKR
-                    </ItemTitle>
-                    <ItemPrice>
-                        KRW152,512~KRW156,564
-                    </ItemPrice>
-                    <ItemNumber>
-                        남은 수량 : 15개
-                    </ItemNumber>
-                    <ItemPutIn>
-                        <NumberBox/>
-                        <SortStyle>
-                            담기
-                        </SortStyle>
-                    </ItemPutIn>
-                </ItemDetail>
-            </ComponentBox>
-            <SortHr/>
+            {items.length === 0 ? (
+                <div>상품이 없습니다.</div>
+            ) : (
+                items.map(item => (
+                    <>
+                        <ComponentBox key={item.itemId}>
+                            <ItemImageBox>
+                                <ItemImage src={item.imageUrl} alt={item.itemName}/>
+                            </ItemImageBox>
+                            <ItemDetail>
+                                <ItemTitle>{item.itemName}</ItemTitle>
+                                <ItemPrice>{item.itemPrice.toLocaleString('ko-KR')}원</ItemPrice>
+                                <ItemNumber>남은 수량 : {item.itemAmount}개</ItemNumber>
+                                <ItemPutIn>
+                                    <NumberBox
+                                        value={quantities[item.itemId]}
+                                        onChange={(value) => handleQuantityChange(item.itemId, value)}
+                                    />
+                                    <SortStyle onClick={() => handleAddToBasket(item.itemId)}>
+                                        담기
+                                    </SortStyle>
+                                </ItemPutIn>
+                            </ItemDetail>
+                        </ComponentBox>
+                        <SortHr/>
+                    </>
+                ))
+            )}
+
         </>
     );
 }
+
 
 
 export default Inventory;
