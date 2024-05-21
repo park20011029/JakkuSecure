@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import Button from "../button/Button";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import axios from "axios";
+import api from "../../axios";
 
 const BoxList = styled.div`
   display: flex;
@@ -53,14 +55,49 @@ const Button_signup = styled(Button)`
 
 
 function Input() {
-    return(
+    const [loginId, setLoginId] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+
+    const handleLogin = async () => {
+        try {
+            const response = await api.post("/login/sign-in", {
+                loginId: loginId,
+                password: password,
+            });
+
+            const { accessToken, refreshToken } = response.data.responseDto;
+
+            localStorage.setItem('access_token', accessToken);
+            localStorage.setItem('refresh_token', refreshToken);
+
+            navigate("/categori");
+            console.log("로그인 성공:", response.data);
+        } catch (error) {
+            // 로그인 실패 처리
+            console.error("로그인 실패:", error);
+        }
+    };
+
+    return (
         <BoxList>
-            <TextBox placeholder="ID"/>
-            <TextBox placeholder="Password" type="password"/>
-            <Button_login>로그인</Button_login>
-            <Link to='/signup'><Button_signup>회원가입</Button_signup></Link>
+            <TextBox
+                placeholder="ID"
+                value={loginId}
+                onChange={(e) => setLoginId(e.target.value)}
+            />
+            <TextBox
+                placeholder="Password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button_login onClick={handleLogin}>로그인</Button_login>
+            <Link to="/signup">
+                <Button_signup>회원가입</Button_signup>
+            </Link>
         </BoxList>
-    )
+    );
 }
 
 export default Input;

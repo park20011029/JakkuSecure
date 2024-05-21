@@ -2,11 +2,14 @@ import React, {useState, useEffect} from "react";
 import { useRecoilState } from 'recoil';
 import "../../styleCss/Topbar.css";
 import { modalState } from '../../atoms/atom';
+import api from "../../axios";
 
 function Topbar_top() {
     const [isFixed, setIsFixed] = useState(false);
 
     const [isOpen, setIsOpen] = useRecoilState(modalState);
+
+    const [nickname, setNickname] = useState("");
 
     const openModal = () => {
         setIsOpen(true);
@@ -17,7 +20,18 @@ function Topbar_top() {
         setIsFixed(position > 10);
     };
 
+    const fetchNickname = async () => {
+        try {
+            const response = await api.get("/topbar/username");
+            setNickname(response.data.responseDto);
+        } catch (error) {
+            console.error("Failed to fetch nickname:", error);
+        }
+    };
+
+
     useEffect(() => {
+        fetchNickname();
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
@@ -39,6 +53,7 @@ function Topbar_top() {
                 </div>
                 <div class="profile_btn" onClick={openModal}>
                     <img src="https://secure-project-dev-image.s3.ap-northeast-2.amazonaws.com/secure-project-front-image/user+1+(1).svg" alt="로고"/>
+                    {nickname && <span className="nickname">{nickname}</span>}
                 </div>
         </div>
     )
