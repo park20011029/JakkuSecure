@@ -70,22 +70,20 @@ const ItemPutIn = styled.div`
 function BucketItem({ userId }) {
     const [basketItems, setBasketItems] = useRecoilState(basketItemsState);
 
+    const fetchBasketItems = async () => {
+        try {
+
+            const response = await axios.get("/customers/basket/1");
+            console.log(response.data);
+            setBasketItems(response.data.responseDto.selectbasket);
+        } catch (error) {
+            console.error("Error fetching basket items:", error);
+        }
+    };
 
     useEffect(() => {
-        const fetchBasketItems = async () => {
-            try {
-                const data = {
-                    userId: 1
-                };
-                const response = await axios.get("/customers/basket", data);
-                console.log(response.data);
-                setBasketItems(response.data.responseDto.selectbasket);
-            } catch (error) {
-                console.error("Error fetching basket items:", error);
-            }
-        };
-
         fetchBasketItems();
+
     }, [userId, setBasketItems]);
 
     const [quantities, setQuantities] = useState({});
