@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import NumberBox from "../button/NumberBox";
 import axios from "axios";
+import api from "../../axios";
 
 const SortHr = styled.hr`
   background: rgba(0, 0, 0, 0.20);
@@ -97,7 +98,7 @@ function Inventory({items}) {
 
     const handleAddToBasket = async (itemId) => {
         try {
-            const response = await axios.post('/customers/addItem', {
+            const response = await api.post('/customers/addItem', {
                 userId: 1,
                 itemId: itemId,
                 itemAmount: quantities[itemId]

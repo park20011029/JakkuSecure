@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import ModuleStyle from "../ModuleStyle.module.css";
 import Sort from "../components/Sort";
 import Inventory from "../components/categori/Inventory";
-import axios from "axios";
+import api from "../axios";
 
 function SelectItem() {
     const [items, setItems] = useState([]);
@@ -11,7 +11,7 @@ function SelectItem() {
     useEffect(() => {
         const fetchItems = async () => {
             try {
-                const response = await axios.get('/customers/item', {
+                const response = await api.get('/customers/item', {
                     params: {
                         latest: 'desc',
                         price: 'asc',

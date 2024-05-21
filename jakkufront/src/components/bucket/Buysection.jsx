@@ -5,6 +5,7 @@ import {useRecoilState, useRecoilValue} from 'recoil';
 import { totalPriceState } from '../../atoms/selector';
 import { usermoneyState, basketItemsState } from "../../atoms/atom";
 import axios from 'axios';
+import api from "../../axios";
 
 const Buyremote = styled.div`
     margin-top: 1vw;
@@ -69,32 +70,25 @@ function Buysection({ userId }) {
 
     const totalPrice = useRecoilValue(totalPriceState);
     const usermoney = useRecoilValue(usermoneyState);
+    const basketItems = useRecoilValue(basketItemsState); // 추가된 부분
 
     const usingAfter = usermoney - totalPrice;
 
     const usermoney_ = usermoney.toLocaleString('ko-KR');
     const usingAfter_ = usingAfter.toLocaleString('ko-KR');
     const totalPrice_ = totalPrice.toLocaleString('ko-KR');
-    const [basketItems, setBasketItems] = useRecoilState(basketItemsState);
 
     const handlePayment = async () => {
         try {
-            {/*const items = basketItems.map(item => ({
+            const items = basketItems.map(item => ({
                 itemId: item.itemId,
                 buyItemAmount: item.basketItemAmount
-            }));*/}
-            const items = [
-                { itemId: 2, buyItemAmount: 4 }
-            ];
+            }));
 
-            const response = await axios.patch(`/customers/payment/${userId}`, items);
+            const response = await api.patch(`/customers/payment/${userId}`, items);
             if (response.data.success) {
                 alert('결제가 완료되었습니다.');
-                setBasketItems([]);
-            } else {
-                alert('결제에 실패하였습니다.');
             }
-
         } catch (error) {
             console.error('Error making payment:', error);
             alert('결제 중 오류가 발생하였습니다.');

@@ -5,6 +5,7 @@ import axios from 'axios';
 import Button from "../button/Button";
 import {basketItemsState} from "../../atoms/atom";
 import {useRecoilState} from "recoil";
+import api from "../../axios";
 
 const SortHr = styled.hr`
     background: rgba(0, 0, 0, 0.20);
@@ -67,24 +68,7 @@ const ItemPutIn = styled.div`
     margin-top: 1vw;
 `
 
-function BucketItem({ userId }) {
-    const [basketItems, setBasketItems] = useRecoilState(basketItemsState);
-
-    const fetchBasketItems = async () => {
-        try {
-
-            const response = await axios.get("/customers/basket/1");
-            console.log(response.data);
-            setBasketItems(response.data.responseDto.selectbasket);
-        } catch (error) {
-            console.error("Error fetching basket items:", error);
-        }
-    };
-
-    useEffect(() => {
-        fetchBasketItems();
-
-    }, [userId, setBasketItems]);
+function BucketItem({ userId, basketItems }) {
 
     const [quantities, setQuantities] = useState({});
 
