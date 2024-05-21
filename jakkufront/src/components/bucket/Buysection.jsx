@@ -63,7 +63,7 @@ const Buybtn = styled.div`
     align-items: center;
 `
 
-function Buysection({ userId }) {
+function Buysection({ userId, remainMoney }) {
     if (!userId) {
         userId = 1;
     }
@@ -85,7 +85,7 @@ function Buysection({ userId }) {
                 buyItemAmount: item.basketItemAmount
             }));
 
-            const response = await api.patch(`/customers/payment/${userId}`, items);
+            const response = await api.patch(`/customers/payment`, items);
             if (response.data.success) {
                 alert('결제가 완료되었습니다.');
             }
