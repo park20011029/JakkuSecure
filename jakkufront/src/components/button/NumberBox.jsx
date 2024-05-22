@@ -73,7 +73,7 @@ function NumberBox({ value, onChange }) {
 }
 
 NumberBox.defaultProps = {
-    value: 1
+    value: 0
 };
 
 export default NumberBox;

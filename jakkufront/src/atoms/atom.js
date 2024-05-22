@@ -7,7 +7,7 @@ export const countState = atom({
 
 export const priceState = atom({
     key: 'priceState',
-    default: 100000, // 물건의 가격
+    default: 0,
 });
 
 export const pageState = atom({
@@ -22,10 +22,15 @@ export const modalState = atom({
 
 export const usermoneyState = atom({
     key: 'usermoneyState',
-    default: 50000000,
+    default: 0,
 });
 
 export const basketItemsState = atom({
     key: 'basketItemsState',
     default: [],
+});
+
+export const buyMoneyState = atom({
+    key: 'buyMoneyState',
+    default: new Map(),
 });
