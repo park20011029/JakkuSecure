@@ -99,7 +99,6 @@ function Inventory({items}) {
     const handleAddToBasket = async (itemId) => {
         try {
             const response = await api.post('/customers/addItem', {
-                userId: 1,
                 itemId: itemId,
                 itemAmount: quantities[itemId]
             });
