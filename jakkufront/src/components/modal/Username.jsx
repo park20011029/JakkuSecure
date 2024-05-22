@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
 import Button from "../button/Button";
+import {useRecoilValue} from "recoil";
+import {nicknameState} from "../../atoms/atom";
 
 const UsernameBox = styled.div`
   display: flex;
@@ -51,6 +53,7 @@ const Button_ = styled(Button)`
 `
 
 function Username() {
+    const nickname = useRecoilValue(nicknameState);
     return (
         <UsernameBox>
             <NameTitle>
@@ -60,7 +63,7 @@ function Username() {
                 <Namecontent>
                     닉네임
                 </Namecontent>
-                <TextBox placeholder="박민기"/>
+                <TextBox placeholder={nickname}/>
             </NameBox>
             <ButtonBox>
                 <Button_>수정</Button_>

@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "../button/Button";
-import {useRecoilState, useRecoilValue} from 'recoil';
-//import { totalPriceState } from '../../atoms/selector';
-import {usermoneyState, basketItemsState, buyMoneyState, priceState} from "../../atoms/atom";
-import axios from 'axios';
+import {useRecoilValue} from 'recoil';
+import {usermoneyState, buyMoneyState, priceState} from "../../atoms/atom";
 import api from "../../axios";
 
 const Buyremote = styled.div`
