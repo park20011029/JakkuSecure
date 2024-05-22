@@ -10,12 +10,12 @@ const CategoriTitle = styled.div`
   padding-top: 6vh;
   padding-left: 6.5vw;
   margin-bottom: 1vw;
-`;
+`
 
 const Sorted = styled.div`
   margin: 1.3vw;
   display: flex;
-`;
+`
 
 const BaseStyle = styled.button`
   height: 4vh;
@@ -32,22 +32,22 @@ const BaseStyle = styled.button`
   &:active{
     background: rgba(217, 217, 217, 0.3);
   }
-`;
+`
 
 const SortStyle1 = styled(BaseStyle)`
     width: 5vw;
-    margin-left: 9vh;
-`;
+    margin-left: 5vw;
+`
 
 const SortStyle2 = styled(BaseStyle)`
     width: 5vw;
-`;
+`
 
 const SortHr = styled.hr`
   background: rgba(0, 0, 0, 0.20);
   width: 95%;
   margin: auto;
-`;
+`
 
 function Sort() {
     const page = useRecoilValue(pageState);

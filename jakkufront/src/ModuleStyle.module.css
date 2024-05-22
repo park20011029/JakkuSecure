@@ -7,16 +7,18 @@ body{
 
 .CategoriPage{
     background: #FFFFFF;
-    height: 1000vh;
+    height: auto;
     width: 90vw;
     margin: auto;
+    padding-bottom: 10vh;
 }
 
 .BuylistPage{
     background: #FFFFFF;
-    height: 1000vh;
+    height: auto;
     width: 80vw;
     margin: auto;
+    padding-bottom: 10vh;
 }
 
 .LoginPage{
