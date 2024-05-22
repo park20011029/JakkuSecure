@@ -5,7 +5,7 @@ import Sort from "../components/Sort";
 import BucketItem from "../components/bucket/BucketItem";
 import Buysection from "../components/bucket/Buysection";
 import {useRecoilState} from "recoil";
-import {basketItemsState, buyMoneyState, usermoneyState} from "../atoms/atom";
+import { buyMoneyState, usermoneyState} from "../atoms/atom";
 import api from "../axios";
 
 const Maintool = styled.div`
@@ -21,9 +21,9 @@ const Buytool = styled.div`
 `
 
 function Bucket() {
-    const [basketItems, setBasketItems] = useRecoilState(basketItemsState);
     const [buymoneys, setBuyMoney] = useRecoilState(buyMoneyState);
     const [remainMoney, setRemainMoney] = useRecoilState(usermoneyState);
+    const [basketItems, setBasketItems] = useState([]);
 
     const fetchBasketItems = async () => {
         try {
@@ -52,7 +52,7 @@ function Bucket() {
     useEffect(() => {
         fetchBasketItems();
         remainingMoney();
-    }, [setBasketItems]);
+    }, []);
 
     return(
         <div className={ModuleStyle.CategoriPage}>
