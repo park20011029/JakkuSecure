@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import Button from "../button/Button";
+import api from "../../axios";
 
 const SortHr = styled.hr`
   background: rgba(0, 0, 0, 0.20);
@@ -108,13 +109,32 @@ const Refund = styled(Button)`
   }
 `;
 
-function BuyItem({itemstate, buydate, imgsrc, itemname, amount, price}) {
+function BuyItem({itemstate, buydate, imgsrc, itemname, amount, price, orderId}) {
   const formattedDate = buydate ? new Date(buydate).toLocaleString() : 'N/A';
   const formattedPrice = new Intl.NumberFormat('ko-KR', {
       style: 'currency',
       currency: 'KRW',
       currencyDisplay: 'code'
   }).format(price);
+
+
+    const getDetail = async (orderId) => {
+        try {
+            const response = await api.get(`/customers/history/detail/${orderId}`);
+            console.log(response.data.responseDto.selectHistoryDetail);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    const refundItem = async (orderId) => {
+        try {
+            const response = await api.patch(`/customers/refund/${orderId}`);
+            console.log(response.data);
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     return (
         <>
@@ -148,8 +168,8 @@ function BuyItem({itemstate, buydate, imgsrc, itemname, amount, price}) {
                     </ItemNumber>
                 </ItemDetail>
                 <BuyDetail>
-                    <Button>상세보기</Button>
-                    <Refund>환불</Refund>
+                    <Button onClick={()=>getDetail(orderId)}>상세보기</Button>
+                    <Refund onClick={()=>refundItem(orderId)}>환불</Refund>
                 </BuyDetail>
             </InventroyComponent>
             <SortHr/>

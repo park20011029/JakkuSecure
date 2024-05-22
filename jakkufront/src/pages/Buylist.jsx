@@ -50,6 +50,7 @@ function Buylist() {
                     itemname={item.itemName}
                     amount={item.orderItemTotalAmount}
                     price={item.totalPrice}
+                    orderId={item.orderId}
                 />
                 )
                 )}
