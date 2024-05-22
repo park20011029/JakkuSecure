@@ -21,7 +21,6 @@ const Buytool = styled.div`
 `
 
 function Bucket() {
-    const userId = 1; // 실제 사용자 ID로 변경해야 합니다.
     const [basketItems, setBasketItems] = useRecoilState(basketItemsState);
     const [remainMoney, setRemainMoney] = useRecoilState(usermoneyState);
 
@@ -48,17 +47,17 @@ function Bucket() {
     useEffect(() => {
         fetchBasketItems();
         remainingMoney();
-    }, [userId, setBasketItems]);
+    }, [setBasketItems]);
 
     return(
         <div className={ModuleStyle.CategoriPage}>
             <Sort/>
             <Maintool>
                 <Itemtool>
-                    <BucketItem userId={userId} basketItems={basketItems}/>
+                    <BucketItem basketItems={basketItems}/>
                 </Itemtool>
                 <Buytool>
-                    <Buysection userId={userId} remainMoney={remainMoney}/>
+                    <Buysection remainMoney={remainMoney}/>
                 </Buytool>
             </Maintool>
         </div>

@@ -68,7 +68,7 @@ const ItemPutIn = styled.div`
     margin-top: 1vw;
 `
 
-function BucketItem({ userId, basketItems }) {
+function BucketItem({ basketItems }) {
 
     const [quantities, setQuantities] = useState({});
 
@@ -78,6 +78,19 @@ function BucketItem({ userId, basketItems }) {
             [itemId]: quantity
         }));
     };
+
+    const handleRemoveItem = async (itemId) => {
+        const itemid = itemId;
+        try {
+            const response = await api.delete(`/customers/basket/delete/${itemid}`);
+            if (response.status === 200) {
+                alert("상품이 장바구니에서 삭제되었습니다.");
+                window.location.reload();
+            }
+        } catch (error) {
+            console.error("Error removing item from basket:", error);
+        }
+    }
 
     return (
         <>
@@ -96,6 +109,7 @@ function BucketItem({ userId, basketItems }) {
                                 onChange={(newAmount) => handleQuantityChange(item.itemId, newAmount)}
                             />
                         </ItemPutIn>
+                        <Button onClick={() => handleRemoveItem(item.itemId)}>삭제</Button>
                     </ItemDetail>
                 </InventroyComponent>
             ))}
