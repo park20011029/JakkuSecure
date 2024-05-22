@@ -4,88 +4,100 @@ import Button from "../button/Button";
 import api from "../../axios";
 
 const SortHr = styled.hr`
-  background: rgba(0, 0, 0, 0.20);
-  width: 95%;
-  margin: auto;
+    background: rgba(0, 0, 0, 0.20);
+    width: 95%;
+    margin: auto;
 `;
 
 const StateText = styled.div`
-  padding-top: 3vh;
-  display: flex;
+    padding-top: 3vh;
+    display: flex;
 `;
 
 const ItemState = styled.div`
-  font-family: Inter;
-  font-size: 1.8vw;
-  font-weight: bold;
-  color: #000;
-  padding-left: 9vw;
-  width: auto;
+    font-family: Inter;
+    font-size: 1.8vw;
+    font-weight: bold;
+    color: #000;
+    padding-left: 9vw;
+    width: auto;
 `;
 
 const BuyDate = styled.div`
-  font-family: Inter;
-  font-size: 1vw;
-  color: #000;
-  padding-left: 0.5vw;
-  width: auto;
-  margin-top: auto;
+    font-family: Inter;
+    font-size: 1vw;
+    color: #000;
+    padding-left: 0.5vw;
+    width: auto;
+    margin-top: auto;
 `;
 
 const InventroyComponent = styled.div`
-  display: flex;
-  width: 80vw;
-  justify-content: space-around;
+    display: flex;
+    width: 80vw;
+    justify-content: space-around;
 `;
 
 const ItemImageBox = styled.div`
-  width: 20vw;
-  height: 30vh;
-  margin: 3vw 3vw 3vw 8vw;
-  background: rgba(217, 217, 217, 0.2);
-  border-radius: 2vw;
+    width: 20vw;
+    height: 30vh;
+    margin: 3vw 3vw 3vw 8vw;
+    background: rgba(217, 217, 217, 0.2);
+    border-radius: 2vw;
 `;
 
 const ItemImage = styled.img`
-  width: 20vw;
-  height: 30vh;
+    width: 20vw;
+    height: 30vh;
 `;
 
 const ItemDetail = styled.div`
-  width: auto;
-  margin-top: 4vw;
+    width: auto;
+    margin-top: 4vw;
 `;
 
 const ItemTitle = styled.div`
-  color: rgba(0, 0, 0, 0.80);
-  display: flex;
-  font-family: Inter;
-  font-size: 1.5vw;
-  font-style: normal;
-  font-weight: bold;
-  line-height: normal;
+    color: rgba(0, 0, 0, 0.80);
+    display: flex;
+    font-family: Inter;
+    font-size: 1.5vw;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
 `;
 
 const PlusItem = styled(ItemTitle)`
-  font-weight: initial;
-  margin-left: 0.3vw;
-  font-size: 1.3vw;
-  margin-top: auto;
+    font-weight: initial;
+    margin-left: 0.3vw;
+    font-size: 1.3vw;
+    margin-top: auto;
 `;
 
 const ItemPrice =styled.div`
-  color: #000;
-  font-family: Inter;
-  font-size: 1.2vw;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  margin-top: 0.5vw;
+    color: #000;
+    font-family: Inter;
+    font-size: 1.2vw;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 0.5vw;
 `;
 
 const ItemNumber = styled.div`
-  margin-top: 7.5vw;
+    margin-top: 7.5vw;
 `;
+
+const RefundTextColor = styled.div`
+    Color: red;
+`;
+
+const CompleteTextColor = styled.div`
+    Color: #898989;
+`;
+
+const ReadyTextColor = styled.div`
+`;
+
 
 const BuyDetail = styled.div`
   display: flex;
@@ -109,14 +121,12 @@ const Refund = styled(Button)`
   }
 `;
 
-function BuyItem({itemstate, buydate, imgsrc, itemname, amount, price, orderId}) {
-  const formattedDate = buydate ? new Date(buydate).toLocaleString() : 'N/A';
-  const formattedPrice = new Intl.NumberFormat('ko-KR', {
-      style: 'currency',
-      currency: 'KRW',
-      currencyDisplay: 'code'
-  }).format(price);
-
+function BuyItem({items}) {
+    const formattedPrice = (price) => new Intl.NumberFormat('ko-KR', {
+        style: 'currency',
+        currency: 'KRW',
+        currencyDisplay: 'code'
+    }).format(price);
 
     const getDetail = async (orderId) => {
         try {
@@ -138,41 +148,55 @@ function BuyItem({itemstate, buydate, imgsrc, itemname, amount, price, orderId})
 
     return (
         <>
-            <StateText>
-                <ItemState>
-                    {itemstate}
-                </ItemState>
-                <BuyDate>
-                    {buydate}
-                </BuyDate>
-            </StateText>
-
-            <InventroyComponent>
-                <ItemImageBox>
-                    <ItemImage className="logoImg" src={imgsrc} alt="로고"/>
-                </ItemImageBox>
-                <ItemDetail>
+            {items.length === 0 ? (
+                <InventroyComponent>
                     <ItemTitle>
-                        {itemname}
-                        {amount > 1 && (
-                            <PlusItem>
-                                외 {amount - 1}개
-                            </PlusItem>
-                        )}
+                        구매한 상품이 없습니다.
                     </ItemTitle>
-                    <ItemPrice>
-                      {formattedPrice}
-                    </ItemPrice>
-                    <ItemNumber>
-                        구매 총 수량 : {amount}개
-                    </ItemNumber>
-                </ItemDetail>
-                <BuyDetail>
-                    <Button onClick={()=>getDetail(orderId)}>상세보기</Button>
-                    <Refund onClick={()=>refundItem(orderId)}>환불</Refund>
-                </BuyDetail>
-            </InventroyComponent>
-            <SortHr/>
+                </InventroyComponent>
+            ) : (
+                items.map(item => (
+                    <>
+                        <StateText>
+                            <ItemState>
+                                {item.orderState === 'READY' ? ( <ReadyTextColor>픽업 대기</ReadyTextColor>)
+                                    : item.orderState === 'REFUND' ? (<RefundTextColor>환불 완료</RefundTextColor>)
+                                        : <CompleteTextColor>구매 확정</CompleteTextColor>}
+                            </ItemState>
+                            <BuyDate>
+                                {item.createAt}
+                            </BuyDate>
+                        </StateText>
+
+                        <InventroyComponent>
+                            <ItemImageBox>
+                                <ItemImage className="logoImg" src={item.imageUrl} alt="로고"/>
+                            </ItemImageBox>
+                            <ItemDetail>
+                                <ItemTitle>
+                                    {item.itemName}
+                                    {item.orderItemTotalAmount > 1 && (
+                                        <PlusItem>
+                                            외 {item.orderItemTotalAmount - 1}개
+                                        </PlusItem>
+                                    )}
+                                </ItemTitle>
+                                <ItemPrice>
+                                    {formattedPrice(item.totalPrice)}
+                                </ItemPrice>
+                                <ItemNumber>
+                                    구매 총 수량 : {item.orderItemTotalAmount}개
+                                </ItemNumber>
+                            </ItemDetail>
+                            <BuyDetail>
+                                <Button onClick={()=>getDetail(item.orderId)}>상세보기</Button>
+                                {item.orderState === 'READY' ? (
+                                    <Refund onClick={()=>refundItem(item.orderId)}>환불</Refund>) : null}
+                            </BuyDetail>
+                        </InventroyComponent>
+                        <SortHr/>
+                    </>
+                )))}
         </>
     );
 }

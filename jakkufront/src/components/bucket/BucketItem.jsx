@@ -93,7 +93,7 @@ function BucketItem({ basketItems }) {
     const [buymoneys, setBuyMoney] = useRecoilState(buyMoneyState);
     const [totalprice, setTotalPrice] = useRecoilState(priceState);
 
-    const handleQuantityChange = (itemId, quantity) => {
+    const handleQuantityChange = (itemId, quantity, totalQuantity) => {
         setQuantities(prevQuantities => ({
             ...prevQuantities,
             [itemId]: quantity
@@ -107,6 +107,11 @@ function BucketItem({ basketItems }) {
         const newMap = new Map(buymoneys);
         newMap.set(itemId, quantity);
         setBuyMoney(newMap);
+
+        if(quantity > totalQuantity) {
+            alert("재고 부족입니다.");
+            quantity -= 1;
+        }
     };
 
     const handleRemoveItem = async (itemId) => {
@@ -126,6 +131,9 @@ function BucketItem({ basketItems }) {
         <>
             {basketItems.length === 0 ? (
                 <NoItemComponent>
+                    <ItemTitle>
+                        장바구니에 담긴 상품이 없습니다.
+                    </ItemTitle>
                 </NoItemComponent>
             ) : (
                 basketItems.map(item => (
@@ -141,7 +149,7 @@ function BucketItem({ basketItems }) {
                                 <ItemPutIn>
                                     <NumberBox
                                         value={quantities[item.itemId]}
-                                        onChange={(newAmount) => handleQuantityChange(item.itemId, newAmount)}
+                                        onChange={(newAmount) => handleQuantityChange(item.itemId, newAmount, item.itemAmount)}
                                     />
                                 </ItemPutIn>
                             </ItemDetail>
