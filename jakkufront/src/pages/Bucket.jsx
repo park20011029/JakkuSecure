@@ -5,7 +5,7 @@ import Sort from "../components/Sort";
 import BucketItem from "../components/bucket/BucketItem";
 import Buysection from "../components/bucket/Buysection";
 import {useRecoilState} from "recoil";
-import {basketItemsState, usermoneyState} from "../atoms/atom";
+import {basketItemsState, buyMoneyState, usermoneyState} from "../atoms/atom";
 import api from "../axios";
 
 const Maintool = styled.div`
@@ -22,13 +22,18 @@ const Buytool = styled.div`
 
 function Bucket() {
     const [basketItems, setBasketItems] = useRecoilState(basketItemsState);
+    const [buymoneys, setBuyMoney] = useRecoilState(buyMoneyState);
     const [remainMoney, setRemainMoney] = useRecoilState(usermoneyState);
 
     const fetchBasketItems = async () => {
         try {
             const response = await api.get(`/customers/basket`);
+            const defaultnum = 0;
             console.log(response.data);
             setBasketItems(response.data.responseDto.selectbasket);
+            const newMap = new Map(buymoneys);
+            newMap.set(response.data.responseDto.selectbasket.itemId, defaultnum);
+            setBuyMoney(newMap);
         } catch (error) {
             console.error("Error fetching basket items:", error);
         }
