@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import NumberBox from "../button/NumberBox";
-import axios from 'axios';
-import Button from "../button/Button";
-import {basketItemsState} from "../../atoms/atom";
+import {buyMoneyState, priceState} from "../../atoms/atom";
 import {useRecoilState} from "recoil";
 import api from "../../axios";
+import { IoMdClose } from "react-icons/io";
 
 const SortHr = styled.hr`
     background: rgba(0, 0, 0, 0.20);
@@ -17,6 +16,13 @@ const InventroyComponent = styled.div`
     display: flex;
     width: 70vw;
     justify-content: space-evenly;
+`;
+
+const NoItemComponent = styled.div`
+  display: flex;
+  width: 70vw;
+  height: 50vh;
+  justify-content: space-evenly;
 `;
 
 const ItemImageBox = styled.div`
@@ -36,7 +42,6 @@ const ItemImage = styled.img`
 const ItemDetail = styled.div`
     width: 30vw;
     margin-top: 4vw;
-    margin-right: 5vw;
 `;
 
 const ItemTitle = styled.div`
@@ -68,15 +73,40 @@ const ItemPutIn = styled.div`
     margin-top: 1vw;
 `
 
+const Delete_box = styled.div`
+  width: 3vw;
+  height: 3vw;
+  margin-right: 5vw;
+`
+
+const Delete_btn = styled(IoMdClose)`
+  width: 100%;
+  height: 100%;
+  margin-top: 3vw;
+  color: darkgray;
+`
+
+
 function BucketItem({ basketItems }) {
 
     const [quantities, setQuantities] = useState({});
+    const [buymoneys, setBuyMoney] = useRecoilState(buyMoneyState);
+    const [totalprice, setTotalPrice] = useRecoilState(priceState);
 
     const handleQuantityChange = (itemId, quantity) => {
         setQuantities(prevQuantities => ({
             ...prevQuantities,
             [itemId]: quantity
         }));
+
+        const item = basketItems.find(item => item.itemId === itemId);
+        const itemPrice = item.itemPrice;
+        const totalPriceChange = itemPrice * parseInt(quantity) - itemPrice * parseInt(quantities[itemId] || 0);
+        setTotalPrice(prevtotalprice => prevtotalprice + totalPriceChange);
+
+        const newMap = new Map(buymoneys);
+        newMap.set(itemId, quantity);
+        setBuyMoney(newMap);
     };
 
     const handleRemoveItem = async (itemId) => {
@@ -94,26 +124,35 @@ function BucketItem({ basketItems }) {
 
     return (
         <>
-            {basketItems.map(item => (
-                <InventroyComponent key={item.itemId}>
-                    <ItemImageBox>
-                        <ItemImage src={item.imageUrl} alt={item.itemName} />
-                    </ItemImageBox>
-                    <ItemDetail>
-                        <ItemTitle>{item.itemName}</ItemTitle>
-                        <ItemPrice>KRW{item.itemPrice.toLocaleString("ko-KR")}</ItemPrice>
-                        <ItemNumber>담은 수량: {quantities[item.itemId]}개</ItemNumber>
-                        <ItemPutIn>
-                            <NumberBox
-                                value={quantities[item.itemId]}
-                                onChange={(newAmount) => handleQuantityChange(item.itemId, newAmount)}
-                            />
-                        </ItemPutIn>
-                        <Button onClick={() => handleRemoveItem(item.itemId)}>삭제</Button>
-                    </ItemDetail>
-                </InventroyComponent>
-            ))}
-            <SortHr />
+            {basketItems.length === 0 ? (
+                <NoItemComponent>
+                </NoItemComponent>
+            ) : (
+                basketItems.map(item => (
+                    <>
+                        <InventroyComponent key={item.itemId}>
+                            <ItemImageBox>
+                                <ItemImage src={item.imageUrl} alt={item.itemName}/>
+                            </ItemImageBox>
+                            <ItemDetail>
+                                <ItemTitle>{item.itemName}</ItemTitle>
+                                <ItemPrice>KRW{item.itemPrice.toLocaleString("ko-KR")}</ItemPrice>
+                                <ItemNumber>담은 수량: {item.basketItemAmount}개</ItemNumber>
+                                <ItemPutIn>
+                                    <NumberBox
+                                        value={quantities[item.itemId]}
+                                        onChange={(newAmount) => handleQuantityChange(item.itemId, newAmount)}
+                                    />
+                                </ItemPutIn>
+                            </ItemDetail>
+                            <Delete_box>
+                                <Delete_btn onClick={() => handleRemoveItem(item.itemId)}></Delete_btn>
+                            </Delete_box>
+                        </InventroyComponent>
+                        <SortHr/>
+                    </>
+                ))
+            )}
         </>
     );
 }

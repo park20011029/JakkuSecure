@@ -2,17 +2,18 @@ import React from "react";
 import styled from "styled-components";
 import Button from "../button/Button";
 import {useRecoilState, useRecoilValue} from 'recoil';
-import { totalPriceState } from '../../atoms/selector';
-import { usermoneyState, basketItemsState } from "../../atoms/atom";
+//import { totalPriceState } from '../../atoms/selector';
+import {usermoneyState, basketItemsState, buyMoneyState, priceState} from "../../atoms/atom";
 import axios from 'axios';
 import api from "../../axios";
 
 const Buyremote = styled.div`
-    margin-top: 1vw;
-    width: 15vw;
-    height: 45vh;
-    border: 4px solid rgba(0,0,0, 0.1);
-    position: fixed;
+  margin-top: 1vw;
+  width: 15vw;
+  height: 45vh;
+  border: 4px solid rgba(0,0,0, 0.1);
+  position: fixed;
+  background-color: #FFFFFF;
 `
 
 const SortHr = styled.hr`
@@ -68,21 +69,23 @@ function Buysection({ userId, remainMoney }) {
         userId = 1;
     }
 
-    const totalPrice = useRecoilValue(totalPriceState);
+    //const totalPrice = useRecoilValue(totalPriceState);
     const usermoney = useRecoilValue(usermoneyState);
-    const basketItems = useRecoilValue(basketItemsState); // 추가된 부분
+    const buymoneys = useRecoilValue(buyMoneyState);
+    const totalprice = useRecoilValue(priceState);
 
-    const usingAfter = usermoney - totalPrice;
+    const totalPrice = 0;
+    const usingAfter = usermoney - totalprice;
 
     const usermoney_ = usermoney.toLocaleString('ko-KR');
     const usingAfter_ = usingAfter.toLocaleString('ko-KR');
-    const totalPrice_ = totalPrice.toLocaleString('ko-KR');
+    const totalprice_ = totalprice.toLocaleString('ko-KR');
 
     const handlePayment = async () => {
         try {
-            const items = basketItems.map(item => ({
-                itemId: item.itemId,
-                buyItemAmount: item.basketItemAmount
+            const items = Array.from(buymoneys).filter(([key]) => key >= 1).map(([key, value]) => ({
+                itemId: key,
+                buyItemAmount: value,
             }));
 
             const response = await api.patch(`/customers/payment`, items);
@@ -91,6 +94,7 @@ function Buysection({ userId, remainMoney }) {
             }
         } catch (error) {
             console.error('Error making payment:', error);
+            console.log(error);
             alert('결제 중 오류가 발생하였습니다.');
         }
     };
@@ -108,7 +112,7 @@ function Buysection({ userId, remainMoney }) {
                     주문 예상 금액
                 </Moneyword>
                 <Moneynumber>
-                    {totalPrice_}원
+                    {totalprice_}원
                 </Moneynumber>
             </Beforebuy>
             <SortHr />
