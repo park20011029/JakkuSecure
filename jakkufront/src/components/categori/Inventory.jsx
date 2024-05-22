@@ -38,7 +38,6 @@ const ItemDetail = styled.div`
 const ItemTitle = styled.div`
   color: rgba(0, 0, 0, 0.80);
   display: flex;
-  font-family: Inter;
   font-size: 1.5vw;
   font-style: normal;
   font-weight: 600;
@@ -47,7 +46,6 @@ const ItemTitle = styled.div`
 
 const ItemPrice =styled.div`
   color: #000;
-  font-family: Inter;
   font-size: 1.2vw;
   font-style: normal;
   font-weight: 700;
@@ -86,7 +84,6 @@ const SortStyle = styled(BaseStyle)`
 `
 
 function Inventory({items}) {
-
     const [quantities, setQuantities] = useState({});
 
     const handleQuantityChange = (itemId, quantity) => {
@@ -106,6 +103,8 @@ function Inventory({items}) {
                 alert("상품이 장바구니에 담겼습니다.");
             }
         } catch (error) {
+            console.log("eRROR")
+            console.log(error)
             alert("담기 에러 발생");
         }
     };
