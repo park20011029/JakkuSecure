@@ -24,6 +24,7 @@ function SelectItem() {
                     setItems(response.data.responseDto.selectItem || []);
                 }
             } catch (error) {
+                console.log(error)
                 alert("담기 에러 발생");
             }
         };
