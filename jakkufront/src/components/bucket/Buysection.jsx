@@ -89,6 +89,7 @@ function Buysection({ userId, remainMoney }) {
             const response = await api.patch(`/customers/payment`, items);
             if (response.data.success) {
                 alert('결제가 완료되었습니다.');
+                window.location.reload();
             }
         } catch (error) {
             console.error('Error making payment:', error);

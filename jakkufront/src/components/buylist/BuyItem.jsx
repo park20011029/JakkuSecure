@@ -141,6 +141,7 @@ function BuyItem({items}) {
         try {
             const response = await api.patch(`/customers/refund/${orderId}`);
             console.log(response.data);
+            window.location.reload();
         } catch (e) {
             console.log(e);
         }
