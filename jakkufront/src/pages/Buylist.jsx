@@ -1,23 +1,18 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import ModuleStyle from "../ModuleStyle.module.css";
 import styled from "styled-components";
 import Sort from "../components/Sort";
 import BuyItem from "../components/buylist/BuyItem";
-import {useRecoilState} from "recoil";
-import {basketItemsState} from "../atoms/atom";
 import api from "../axios";
 
 const Maintool = styled.div`
 `
 
 function Buylist() {
-
-    const [basketItems, setBasketItems] = useRecoilState(basketItemsState);
-
+    const [basketItems, setBasketItems] = useState([]);
 
     const fetchBasketItems = async () => {
         try {
-
             const response = await api.get('/customers/history', {
                 params: {
                     latest: 'desc',
@@ -35,7 +30,6 @@ function Buylist() {
 
     useEffect(() => {
         fetchBasketItems();
-
     }, []);
 
     return(
@@ -52,9 +46,7 @@ function Buylist() {
                     price={item.totalPrice}
                     orderId={item.orderId}
                 />
-                )
-                )}
-                
+                ))}
             </Maintool>
         </div>
     )

@@ -25,11 +25,6 @@ export const usermoneyState = atom({
     default: 0,
 });
 
-export const basketItemsState = atom({
-    key: 'basketItemsState',
-    default: [],
-});
-
 export const buyMoneyState = atom({
     key: 'buyMoneyState',
     default: new Map(),
