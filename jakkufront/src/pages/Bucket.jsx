@@ -39,19 +39,8 @@ function Bucket() {
         }
     };
 
-    const remainingMoney = async () => {
-        try{
-            const response = await api.get(`/customers/basket/point`);
-            console.log("남은 돈 확인");
-            setRemainMoney(response.data.responseDto);
-        } catch (error) {
-            console.error("Error fetching remaining money:", error);
-        }
-    }
-
     useEffect(() => {
         fetchBasketItems();
-        remainingMoney();
     }, []);
 
     return(
