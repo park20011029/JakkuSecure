@@ -2,12 +2,12 @@ import React from 'react';
 import styled from "styled-components";
 import Button from "../button/Button";
 
-const UserpasswordBox = styled.div`
+const AdmincontentBox = styled.div`
   display: flex;
   flex-direction: column;
 `
 
-const PasswordBox = styled.div`
+const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 2vw;
@@ -16,6 +16,7 @@ const PasswordBox = styled.div`
 const InputBox = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 1vw;
 `
 
@@ -29,15 +30,6 @@ const TextBox = styled.input`
   padding: 0.5vw;
 
   font-size: 1vw;
-`
-
-const PasswordTitle = styled.div`
-  font-size: 1.5vw;
-  font-style: normal;
-  font-weight: bold;
-  line-height: normal;
-
-  margin-bottom: 2vw;
 `
 
 const Namecontent = styled.div`
@@ -54,38 +46,51 @@ const Button_ = styled(Button)`
   width: 8vw;
 `
 
-function UserPassword() {
+const Button_no = styled(Button)`
+  background-color: #FFFFFF;
+  &:hover{
+    background: rgba(217, 217, 217, 0.8);
+  }
+  &:active{
+    background: rgba(217, 217, 217, 0.2);
+  }
+  outline: 2px solid black;
+  
+  color: black;
+   
+  height: 2vw;
+  width: 8vw;
+`
+
+function Admincontent() {
     return (
-        <UserpasswordBox>
-            <PasswordTitle>
-                비밀번호 변경
-            </PasswordTitle>
-            <PasswordBox>
+        <AdmincontentBox>
+            <ContentBox>
                 <InputBox>
                     <Namecontent>
-                        기존 비밀번호
+                        상품명
                     </Namecontent>
-                    <TextBox placeholder="Password"/>
+                    <TextBox placeholder="상품명"/>
                 </InputBox>
                 <InputBox>
                     <Namecontent>
-                        새 비밀번호
+                        가격
                     </Namecontent>
-                    <TextBox placeholder="New Password"/>
+                    <TextBox placeholder="000원"/>
                 </InputBox>
                 <InputBox>
                     <Namecontent>
-                        새 비밀번호 확인
+                        수량
                     </Namecontent>
-                    <TextBox placeholder="New Password"/>
+                    <TextBox placeholder="0개"/>
                 </InputBox>
-            </PasswordBox>
+            </ContentBox>
             <ButtonBox>
-                <Button_>수정</Button_>
-                <Button_>취소</Button_>
+                <Button_>추가</Button_>
+                <Button_no>취소</Button_no>
             </ButtonBox>
-        </UserpasswordBox>
+        </AdmincontentBox>
     );
 }
 
-export default UserPassword;
+export default Admincontent;

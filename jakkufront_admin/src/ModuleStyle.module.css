@@ -12,6 +12,13 @@ body{
     margin: auto;
 }
 
+.PickupPage{
+    background: #FFFFFF;
+    height: 1000vh;
+    width: 80vw;
+    margin: auto;
+}
+
 .MainPage{
     background: #FFFFFF;
     height: auto;

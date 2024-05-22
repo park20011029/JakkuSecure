@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import Button from "../button/Button";
+import api from "../../axios";
 
 const SortHr = styled.hr`
   background: rgba(0, 0, 0, 0.20);
-  width: 80vw;
+  width: 95%;
   margin: auto;
 `;
 
@@ -34,14 +35,13 @@ const BuyDate = styled.div`
 const InventroyComponent = styled.div`
   display: flex;
   width: 80vw;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 const ItemImageBox = styled.div`
   width: 20vw;
   height: 30vh;
-  margin: 3vw;
-  margin-left: 8vw;
+  margin: 3vw 3vw 3vw 8vw;
   background: rgba(217, 217, 217, 0.2);
   border-radius: 2vw;
 `;
@@ -54,7 +54,6 @@ const ItemImage = styled.img`
 const ItemDetail = styled.div`
   width: auto;
   margin-top: 4vw;
-  margin-right: 5vw;
 `;
 
 const ItemTitle = styled.div`
@@ -93,6 +92,7 @@ const BuyDetail = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   margin-bottom: 2vw;
+  margin-right: 2vw;
   width: 8vw;
 `;
 
@@ -109,39 +109,67 @@ const Refund = styled(Button)`
   }
 `;
 
-function BuyItem() {
+function BuyItem({itemstate, buydate, imgsrc, itemname, amount, price, orderId}) {
+  const formattedDate = buydate ? new Date(buydate).toLocaleString() : 'N/A';
+  const formattedPrice = new Intl.NumberFormat('ko-KR', {
+      style: 'currency',
+      currency: 'KRW',
+      currencyDisplay: 'code'
+  }).format(price);
+
+
+    const getDetail = async (orderId) => {
+        try {
+            const response = await api.get(`/customers/history/detail/${orderId}`);
+            console.log(response.data.responseDto.selectHistoryDetail);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    const refundItem = async (orderId) => {
+        try {
+            const response = await api.patch(`/customers/refund/${orderId}`);
+            console.log(response.data);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     return (
         <>
             <StateText>
                 <ItemState>
-                    픽업대기
+                    {itemstate}
                 </ItemState>
                 <BuyDate>
-                    2024.04.14
+                    {buydate}
                 </BuyDate>
             </StateText>
 
             <InventroyComponent>
                 <ItemImageBox>
-                    <ItemImage className="logoImg" src="https://secure-project-dev-image.s3.ap-northeast-2.amazonaws.com/secure-project-front-image/ex_item.svg" alt="로고"/>
+                    <ItemImage className="logoImg" src={imgsrc} alt="로고"/>
                 </ItemImageBox>
                 <ItemDetail>
                     <ItemTitle>
-                        1000R 커브드 모니터LC32T5  52FDKXKR
-                        <PlusItem>
-                            외 3개
-                        </PlusItem>
+                        {itemname}
+                        {amount > 1 && (
+                            <PlusItem>
+                                외 {amount - 1}개
+                            </PlusItem>
+                        )}
                     </ItemTitle>
                     <ItemPrice>
-                        KRW100,000
+                      {formattedPrice}
                     </ItemPrice>
                     <ItemNumber>
-                        구매 총 수량 : 4개
+                        구매 총 수량 : {amount}개
                     </ItemNumber>
                 </ItemDetail>
                 <BuyDetail>
-                    <Button>상세보기</Button>
-                    <Refund>환불</Refund>
+                    <Button onClick={()=>getDetail(orderId)}>상세보기</Button>
+                    <Refund onClick={()=>refundItem(orderId)}>환불</Refund>
                 </BuyDetail>
             </InventroyComponent>
             <SortHr/>

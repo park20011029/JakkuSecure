@@ -2,14 +2,14 @@ import React from "react";
 import ModuleStyle from "../ModuleStyle.module.css";
 import styled from "styled-components";
 import Sort from "../components/Sort";
-import BuyItem from "../components/buylist/BuyItem";
+import BuyItem from "../components/pickup/BuyItem";
 
 const Maintool = styled.div`
 `
 
-function SelectItem() {
+function PickUp() {
     return(
-        <div className={ModuleStyle.CategoriPage}>
+        <div className={ModuleStyle.PickupPage}>
             <Sort/>
             <Maintool>
                 <BuyItem/>
@@ -18,4 +18,4 @@ function SelectItem() {
     )
 }
 
-export default SelectItem;
+export default PickUp;

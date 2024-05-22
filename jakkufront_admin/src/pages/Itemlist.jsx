@@ -1,9 +1,9 @@
 import React from "react";
 import ModuleStyle from "../ModuleStyle.module.css";
 import Sort from "../components/Sort";
-import Inventory from "../components/categori/Inventory";
+import Inventory from "../components/itemlist/Inventory";
 
-function SelectItem() {
+function Itemlist() {
     return(
     <div className={ModuleStyle.CategoriPage}>
         <Sort/>
@@ -12,4 +12,4 @@ function SelectItem() {
     )
   }
 
-  export default SelectItem;
+  export default Itemlist;
