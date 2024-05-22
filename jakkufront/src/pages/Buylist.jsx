@@ -36,17 +36,7 @@ function Buylist() {
         <div className={ModuleStyle.BuylistPage}>
             <Sort/>
             <Maintool>
-                {basketItems.map((item, index) => (
-                    <BuyItem
-                    itemstate={item.orderState}
-                    buydate={item.createAt}
-                    imgsrc={item.imageUrl}
-                    itemname={item.itemName}
-                    amount={item.orderItemTotalAmount}
-                    price={item.totalPrice}
-                    orderId={item.orderId}
-                />
-                ))}
+                <BuyItem items={basketItems}/>
             </Maintool>
         </div>
     )

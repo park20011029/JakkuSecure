@@ -5,78 +5,80 @@ import axios from "axios";
 import api from "../../axios";
 
 const SortHr = styled.hr`
-  background: rgba(0, 0, 0, 0.20);
-  width: 85%;
-  margin: auto;
+    background: rgba(0, 0, 0, 0.20);
+    width: 85%;
+    margin: auto;
 `
 
 const ComponentBox = styled.div`
-  display: flex;
-  width: 90vw;
-  justify-content: space-evenly;
+    display: flex;
+    width: 90vw;
+    justify-content: space-evenly;
 `
 
 const ItemImageBox = styled.div`
-  width: 20vw;
-  height: 30vh;
-  margin: 3vw 3vw 3vw 8vw;
-  background: rgba(217, 217, 217, 0.2);
-  border-radius: 2vw;
+    width: 20vw;
+    height: 30vh;
+    margin: 3vw 3vw 3vw 8vw;
+    background: rgba(217, 217, 217, 0.2);
+    border-radius: 2vw;
 `
 
 const ItemImage = styled.img`
-  width: 20vw;
-  height: 30vh;
+    width: 20vw;
+    height: 30vh;
 `
 
 const ItemDetail = styled.div`
-  width: 30vw;
-  margin-top: 4vw;
-  margin-right: 5vw;
+    width: 30vw;
+    margin-top: 4vw;
+    margin-right: 5vw;
 `
 
 const ItemTitle = styled.div`
-  color: rgba(0, 0, 0, 0.80);
-  display: flex;
-  font-size: 1.5vw;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+    color: rgba(0, 0, 0, 0.80);
+    display: flex;
+    font-family: Inter;
+    font-size: 1.5vw;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 `
 
 const ItemPrice =styled.div`
-  color: #000;
-  font-size: 1.2vw;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  margin-top: 0.5vw;
+    color: #000;
+    font-family: Inter;
+    font-size: 1.2vw;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 0.5vw;
 `
 
 const ItemNumber = styled.div`
-  margin-top: 7.5vw;
+    margin-top: 7.5vw;
 `
 
 const ItemPutIn = styled.div`
-  display: flex;
-  margin-top: 1vw;
+    display: flex;
+    margin-top: 1vw;
 `
 
 const BaseStyle = styled.button`
-  height: 3vh;
-  margin-left: 2vh;
-  border-radius: 20vh;
-  border: none;
-  font-weight: 600;
-  font-size: 0.9vw;
+    height: 3vh;
+    margin-left: 2vh;
+    border-radius: 20vh;
+    border: none;
+    font-weight: 600;
+    font-size: 0.9vw;
 
-  background: rgba(217, 217, 217, 0.7);
-  &:hover{
-    background: rgba(217, 217, 217, 0.5);
-  }
-  &:active{
-    background: rgba(217, 217, 217, 0.3);
-  }
+    background: rgba(217, 217, 217, 0.7);
+    &:hover{
+        background: rgba(217, 217, 217, 0.5);
+    }
+    &:active{
+        background: rgba(217, 217, 217, 0.3);
+    }
 `
 
 const SortStyle = styled(BaseStyle)`
@@ -84,13 +86,19 @@ const SortStyle = styled(BaseStyle)`
 `
 
 function Inventory({items}) {
+
     const [quantities, setQuantities] = useState({});
 
-    const handleQuantityChange = (itemId, quantity) => {
+    const handleQuantityChange = (itemId, quantity, totalQuantity) => {
         setQuantities(prevQuantities => ({
             ...prevQuantities,
             [itemId]: quantity
         }));
+
+        if(quantity > totalQuantity) {
+            alert("재고 부족입니다.");
+            quantity -= 1;
+        }
     };
 
     const handleAddToBasket = async (itemId) => {
@@ -103,8 +111,6 @@ function Inventory({items}) {
                 alert("상품이 장바구니에 담겼습니다.");
             }
         } catch (error) {
-            console.log("eRROR")
-            console.log(error)
             alert("담기 에러 발생");
         }
     };
@@ -112,7 +118,11 @@ function Inventory({items}) {
     return (
         <>
             {items.length === 0 ? (
-                <div>상품이 없습니다.</div>
+                <ItemDetail>
+                    <ItemTitle>
+                        구매한 상품이 없습니다.
+                    </ItemTitle>
+                </ItemDetail>
             ) : (
                 items.map(item => (
                     <>
@@ -127,7 +137,7 @@ function Inventory({items}) {
                                 <ItemPutIn>
                                     <NumberBox
                                         value={quantities[item.itemId]}
-                                        onChange={(value) => handleQuantityChange(item.itemId, value)}
+                                        onChange={(value) => handleQuantityChange(item.itemId, value, item.itemAmount)}
                                     />
                                     <SortStyle onClick={() => handleAddToBasket(item.itemId)}>
                                         담기

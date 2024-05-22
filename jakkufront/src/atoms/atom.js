@@ -29,3 +29,8 @@ export const buyMoneyState = atom({
     key: 'buyMoneyState',
     default: new Map(),
 });
+
+export const nicknameState = atom({
+    key: 'nicknameState',
+    default: 'NickName',
+});
