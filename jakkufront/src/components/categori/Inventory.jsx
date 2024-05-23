@@ -44,9 +44,27 @@ const ItemTitle = styled.div`
     font-weight: 600;
     line-height: normal;
 `
+const SoldOut = styled.div`
+    Color: #898989;
+    display: flex;
+    font-family: Inter;
+    font-size: 1.5vw;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+`
 
 const ItemPrice =styled.div`
     color: #000;
+    font-family: Inter;
+    font-size: 1.2vw;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 0.5vw;
+`
+const SoldOutItemPrice =styled.div`
+    Color: #898989;
     font-family: Inter;
     font-size: 1.2vw;
     font-style: normal;
@@ -58,7 +76,10 @@ const ItemPrice =styled.div`
 const ItemNumber = styled.div`
     margin-top: 7.5vw;
 `
-
+const SoldOutItemNumber = styled.div`
+    margin-top: 7.5vw;
+    Color: #898989;
+`
 const ItemPutIn = styled.div`
     display: flex;
     margin-top: 1vw;
@@ -84,6 +105,8 @@ const BaseStyle = styled.button`
 const SortStyle = styled(BaseStyle)`
     width: 4vw;
 `
+
+
 
 function Inventory({items}) {
 
@@ -131,9 +154,19 @@ function Inventory({items}) {
                                 <ItemImage src={item.imageUrl} alt={item.itemName}/>
                             </ItemImageBox>
                             <ItemDetail>
-                                <ItemTitle>{item.itemName}</ItemTitle>
-                                <ItemPrice>{item.itemPrice.toLocaleString('ko-KR')}원</ItemPrice>
-                                <ItemNumber>남은 수량 : {item.itemAmount}개</ItemNumber>
+                                {item.itemAmount === 0 ? (
+                                    <>
+                                        <SoldOut>{item.itemName}</SoldOut>
+                                        <SoldOutItemPrice>{item.itemPrice.toLocaleString('ko-KR')}원</SoldOutItemPrice>
+                                        <SoldOutItemNumber>품절 상품입니다.</SoldOutItemNumber>
+                                    </>
+                                    )
+                                    : (<>
+                                        <ItemTitle>{item.itemName}</ItemTitle>
+                                        <ItemPrice>{item.itemPrice.toLocaleString('ko-KR')}원</ItemPrice>
+                                        <ItemNumber>남은 수량 : {item.itemAmount}개</ItemNumber>
+                                    </>)}
+
                                 <ItemPutIn>
                                     <NumberBox
                                         value={quantities[item.itemId]}
