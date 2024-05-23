@@ -81,15 +81,19 @@ function Buysection({ userId, remainMoney }) {
 
     const handlePayment = async () => {
         try {
-            const items = Array.from(buymoneys).filter(([key]) => key >= 1).map(([key, value]) => ({
+            const items = Array.from(buymoneys).filter(([key, value]) => key >= 1 && value >= 1).map(([key, value]) => ({
                 itemId: key,
                 buyItemAmount: value,
             }));
 
-            const response = await api.patch(`/customers/payment`, items);
-            if (response.data.success) {
-                alert('결제가 완료되었습니다.');
-                window.location.reload();
+            if (items.length > 0) {
+                const response = await api.patch(`/customers/payment`, items);
+                if (response.data.success) {
+                    alert('결제가 완료되었습니다.');
+                    window.location.reload();
+                }
+            } else {
+                alert('구매할 물건이 없습니다.');
             }
         } catch (error) {
             console.error('Error making payment:', error);
