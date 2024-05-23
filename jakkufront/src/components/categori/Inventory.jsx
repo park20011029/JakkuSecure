@@ -120,7 +120,7 @@ function Inventory({items}) {
             {items.length === 0 ? (
                 <ItemDetail>
                     <ItemTitle>
-                        구매한 상품이 없습니다.
+                        등록된 상품이 없습니다.
                     </ItemTitle>
                 </ItemDetail>
             ) : (

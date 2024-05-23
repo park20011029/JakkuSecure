@@ -109,7 +109,7 @@ function BucketItem({ basketItems }) {
         setBuyMoney(newMap);
 
         if(quantity > totalQuantity) {
-            alert("재고 부족입니다.");
+            alert("최대 수량입니다.");
             quantity -= 1;
         }
     };
@@ -149,7 +149,7 @@ function BucketItem({ basketItems }) {
                                 <ItemPutIn>
                                     <NumberBox
                                         value={quantities[item.itemId]}
-                                        onChange={(newAmount) => handleQuantityChange(item.itemId, newAmount, item.itemAmount)}
+                                        onChange={(newAmount) => handleQuantityChange(item.itemId, newAmount, item.basketItemAmount)}
                                     />
                                 </ItemPutIn>
                             </ItemDetail>
