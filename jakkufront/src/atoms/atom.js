@@ -34,3 +34,8 @@ export const nicknameState = atom({
     key: 'nicknameState',
     default: 'NickName',
 });
+
+export const currentState = atom({
+    key: 'currentPage',
+    default: 1,
+})

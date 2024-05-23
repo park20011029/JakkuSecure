@@ -4,12 +4,11 @@ import styled from "styled-components";
 import Sort from "../components/Sort";
 import BuyItem from "../components/buylist/BuyItem";
 import api from "../axios";
-
-const Maintool = styled.div`
-`
+import Pagesection from "../components/Pagesection";
 
 function Buylist() {
     const [basketItems, setBasketItems] = useState([]);
+    const [totalPage, setTotalpage] = useState();
 
     const fetchBasketItems = async () => {
         try {
@@ -23,6 +22,7 @@ function Buylist() {
             });
             console.log(response.data.responseDto.selectOrder);
             setBasketItems(response.data.responseDto.selectOrder);
+            setTotalpage(response.data.responseDto.pageInfo.totalPages);
         } catch (error) {
             console.error("Error fetching basket items:", error);
         }
@@ -35,9 +35,8 @@ function Buylist() {
     return(
         <div className={ModuleStyle.BuylistPage}>
             <Sort/>
-            <Maintool>
-                <BuyItem items={basketItems}/>
-            </Maintool>
+            <BuyItem items={basketItems}/>
+            <Pagesection totalPage={totalPage}/>
         </div>
     )
 }
