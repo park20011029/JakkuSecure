@@ -15,7 +15,6 @@ const StateText = styled.div`
 `;
 
 const ItemState = styled.div`
-    font-family: Inter;
     font-size: 1.8vw;
     font-weight: bold;
     color: #000;
@@ -24,7 +23,6 @@ const ItemState = styled.div`
 `;
 
 const BuyDate = styled.div`
-    font-family: Inter;
     font-size: 1vw;
     color: #000;
     padding-left: 0.5vw;
@@ -59,7 +57,6 @@ const ItemDetail = styled.div`
 const ItemTitle = styled.div`
     color: rgba(0, 0, 0, 0.80);
     display: flex;
-    font-family: Inter;
     font-size: 1.5vw;
     font-style: normal;
     font-weight: bold;
@@ -75,7 +72,6 @@ const PlusItem = styled(ItemTitle)`
 
 const ItemPrice =styled.div`
     color: #000;
-    font-family: Inter;
     font-size: 1.2vw;
     font-style: normal;
     font-weight: 700;
@@ -96,8 +92,7 @@ const CompleteTextColor = styled.div`
 `;
 
 const ReadyTextColor = styled.div`
-`;
-
+`
 
 const BuyDetail = styled.div`
   display: flex;
