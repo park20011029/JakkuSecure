@@ -28,7 +28,7 @@ function Modal() {
                 <div className="modal-overlay" onClick={handleOverlayClick}>
                     <div className="modal">
                         <div className="modal-content">
-                            <AdminImg/>
+                            {/*<AdminImg/>*/}
                             <Admincontent/>
                         </div>
                     </div>
