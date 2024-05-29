@@ -5,10 +5,13 @@ import Sort from "../components/Sort";
 import BuyItem from "../components/buylist/BuyItem";
 import api from "../axios";
 import Pagesection from "../components/Pagesection";
+import {useRecoilState} from "recoil";
+import {currentState} from "../atoms/atom";
 
 function Buylist() {
     const [basketItems, setBasketItems] = useState([]);
     const [totalPage, setTotalpage] = useState();
+    const [currentPage, setCurrentPage] = useRecoilState(currentState);
 
     const fetchBasketItems = async () => {
         try {
@@ -16,7 +19,7 @@ function Buylist() {
                 params: {
                     latest: 'desc',
                     status: 'asc',
-                    page: 0, //여기 이 부분에다가 페이지 번호 넣는거 하셈
+                    page: currentPage - 1, //여기 이 부분에다가 페이지 번호 넣는거 하셈
                     size: 5
                 }
             });
