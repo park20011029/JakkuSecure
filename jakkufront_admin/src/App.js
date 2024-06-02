@@ -2,8 +2,7 @@ import './App.css';
 import Topbar from "./pages/Topbar";
 import {Routes, Route, BrowserRouter, useLocation} from 'react-router-dom';
 import Itemlist from "./pages/Itemlist";
-/*import Login from "./pages/Login"
-import Signup from "./pages/Signup"*/
+import Login from "./pages/Login"
 import Footer from "./pages/Footer";
 import PickUp from "./pages/PickUp";
 import { RecoilRoot } from "recoil";
@@ -33,8 +32,7 @@ function AppContent() {
                 <Topbar/>
             )}
             <Routes>
-                {/*<Route path="/" element={<Login/>}/>
-                <Route path="/signup" element={<Signup/>}/>*/}
+                <Route path="/" element={<Login/>}/>
                 <Route path="/list" element={<Itemlist/>}/>
                 <Route path="/pickup" element={<PickUp/>}/>
             </Routes>

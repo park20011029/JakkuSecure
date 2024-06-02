@@ -1,5 +1,8 @@
 import React, {useState} from "react";
 import styled from "styled-components";
+import {useRecoilState} from "recoil";
+import {countState} from "../../atoms/atom";
+import {useLocation} from "react-router-dom";
 
 const CountBox = styled.div`
   display: flex;
@@ -46,25 +49,32 @@ const Textbox = styled.span`
   justify-content: center;
 `
 
-function NumberBox(){
-    const [count, setCount] = useState(0);
+function NumberBox({ value, onChange }) {
+    const location = useLocation();
+    const iscategoriPage1 = location.pathname === "/categori";
 
-    const decrementCount = () => {
-        if (count > 0) {
-            setCount(prevCount => prevCount - 1);
-        }
+    const handleIncrement = () => {
+        onChange(value + 1);
     };
 
-    const incrementCount = () => {
-        setCount(prevCount => prevCount + 1);
+    const handleDecrement = () => {
+        if (value > 0) {
+            onChange(value - 1);
+        }
     };
 
     return (
         <CountBox>
-            <Btn onClick={decrementCount}>-</Btn>
-            <Textbox>{count}</Textbox>
-            <Btn onClick={incrementCount}>+</Btn>
+            <Btn onClick={handleDecrement}>-</Btn>
+            <Textbox>{value}</Textbox>
+            <Btn onClick={handleIncrement}>+</Btn>
         </CountBox>
     );
 }
+
+
+NumberBox.defaultProps = {
+    value: 0
+};
+
 export default NumberBox;

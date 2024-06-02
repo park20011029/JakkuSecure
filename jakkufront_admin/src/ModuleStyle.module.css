@@ -19,6 +19,14 @@ body{
     margin: auto;
 }
 
+.LoginPage{
+    background: #FFFFFF;
+    height: 90vh;
+    width: 70vw;
+    margin-top: 5vh;
+    margin-left: 15vw;
+}
+
 .MainPage{
     background: #FFFFFF;
     height: auto;
