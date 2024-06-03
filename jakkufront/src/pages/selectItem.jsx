@@ -44,19 +44,7 @@ function SelectItem() {
 
     useEffect(() => {
         fetchItems();
-    }, [currentPage]);
-
-    useEffect(() => {
-        fetchItems();
-    }, [latest]);
-
-    useEffect(() => {
-        fetchItems();
-    }, [priceOrder]);
-
-    useEffect(() => {
-        fetchItems();
-    }, [searchName]);
+    }, [currentPage, latest, priceOrder, searchName]);
 
     return(
     <div className={ModuleStyle.CategoriPage}>
