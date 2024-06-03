@@ -75,7 +75,7 @@ function Input() {
 
     const overflowInput = (input) => {
         const sqlInjectionPattern = /[;'"--/*#\\]/;
-        return input.length >= 2 && input.length <= 100;
+        return input.length <= 30;
     };
 
     const injectInput = (input) => {
@@ -85,7 +85,7 @@ function Input() {
 
     const handleLogin = async () => {
         if (!overflowInput(loginId)) {
-            alert("아이디는 2글자 이상, 100글자 이하로 입력해주세요.");
+            alert("30글자 이하로 입력해주세요.");
             return;
         }
         if(!overflowInput(password)) {
