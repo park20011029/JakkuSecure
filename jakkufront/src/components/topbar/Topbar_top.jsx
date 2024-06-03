@@ -30,10 +30,10 @@ function Topbar_top({ nickname }) {
             return;
         }
 
-        if (inputValue.length >= 2 && inputValue.length <= 100) {
+        if (inputValue.length <= 30) {
             setSearchName(inputValue);
         } else {
-            alert("검색어는 2글자 이상, 100글자 이하로 입력해주세요.");
+            alert("30글자 이하로 입력해주세요.");
         }
     };
 
