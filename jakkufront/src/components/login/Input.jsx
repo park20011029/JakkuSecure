@@ -64,7 +64,7 @@ function Input() {
 
     useEffect(() => {
         let timer;
-        if (tryCount > 5) {
+        if (tryCount > 4) {
             timer = setTimeout(() => {
                 settryCount(0);
                 alert("로그인 시도 횟수가 초기화되었습니다. 다시 시도해주세요.");
@@ -100,7 +100,7 @@ function Input() {
             alert("비밀번호에 사용할 수 없는 문자가 포함되어 있습니다.");
             return;
         }
-        if(tryCount > 5) {
+        if(tryCount > 4) {
             alert("로그인 시도 횟수를 초과했습니다. 잠시 후 다시 시도해주세요.");
             return;
         }
@@ -121,6 +121,10 @@ function Input() {
         } catch (error) {
             settryCount((prevCount) => {
                 const newCount = prevCount + 1;
+                if(5 - newCount === 0) {
+                    alert("로그인 시도 횟수를 초과했습니다. 잠시 후 다시 시도해주세요.");
+                    return newCount;
+                }
                 alert(`로그인 실패. ${5 - newCount}회 남았습니다.`);
                 return newCount;
             });
