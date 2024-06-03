@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilState } from 'recoil';
 import "../../styleCss/Topbar.css";
-import { modalState } from '../../atoms/atom';
+import { modalState, searchNameState } from '../../atoms/atom';
 
-
-function Topbar_top({nickname}) {
+function Topbar_top({ nickname }) {
     const [isFixed, setIsFixed] = useState(false);
-
     const [isOpen, setIsOpen] = useRecoilState(modalState);
+    const [searchName, setSearchName] = useRecoilState(searchNameState);
+    const [inputValue, setInputValue] = useState('');
 
     const openModal = () => {
         setIsOpen(true);
@@ -18,6 +18,25 @@ function Topbar_top({nickname}) {
         setIsFixed(position > 10);
     };
 
+    const handleInputChange = (e) => {
+        setInputValue(e.target.value);
+    };
+
+    const handleSearchClick = () => {
+        const sqlInjectionPattern = /[;'"--/*#\\]/;
+
+        if (sqlInjectionPattern.test(inputValue)) {
+            alert("검색어에 사용할 수 없는 문자가 포함되어 있습니다.");
+            return;
+        }
+
+        if (inputValue.length >= 2 && inputValue.length <= 100) {
+            setSearchName(inputValue);
+        } else {
+            alert("검색어는 2글자 이상, 100글자 이하로 입력해주세요.");
+        }
+    };
+
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => {
@@ -26,24 +45,29 @@ function Topbar_top({nickname}) {
     }, []);
 
     return (
-        <div class="topbar"  style={{ position: isFixed ? 'fixed' : 'static', top: isFixed ? '0' : '0' }}>
-            <div class="logo">
-                <img class="logoImg" src="https://secure-project-dev-image.s3.ap-northeast-2.amazonaws.com/secure-project-front-image/logo_fix+(1).svg" alt="로고"/>
+        <div className="topbar" style={{ position: isFixed ? 'fixed' : 'static', top: isFixed ? '0' : '0' }}>
+            <div className="logo">
+                <img className="logoImg" src="https://secure-project-dev-image.s3.ap-northeast-2.amazonaws.com/secure-project-front-image/logo_fix+(1).svg" alt="로고"/>
             </div>
-            <div class="search_bar">
-                <div class="search_text">
-                    <input type="text" placeholder="search"/>
+            <div className="search_bar">
+                <div className="search_text">
+                    <input
+                        type="text"
+                        placeholder="search"
+                        value={inputValue}
+                        onChange={handleInputChange}
+                    />
                 </div>
-                <div class="search_btn">
+                <div className="search_btn" onClick={handleSearchClick}>
                     <img src="https://secure-project-dev-image.s3.ap-northeast-2.amazonaws.com/secure-project-front-image/search-13-128+1.svg" alt="로고"/>
                 </div>
             </div>
-            <div class="profile_btn" onClick={openModal}>
+            <div className="profile_btn" onClick={openModal}>
                 <img src="https://secure-project-dev-image.s3.ap-northeast-2.amazonaws.com/secure-project-front-image/user+1+(1).svg" alt="로고"/>
                 {nickname && <span className="nickname">{nickname}</span>}
             </div>
         </div>
-    )
+    );
 }
 
 export default Topbar_top;

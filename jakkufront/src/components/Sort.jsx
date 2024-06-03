@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
-import { useRecoilValue } from 'recoil';
-import { pageState } from '../atoms/atom';
+import {useRecoilState, useRecoilValue} from 'recoil';
+import {latestState, pageState, priceOrderState, priceState, statusState} from '../atoms/atom';
 
 const CategoriTitle = styled.div`
   font-size: 2vw;
@@ -51,6 +51,21 @@ const SortHr = styled.hr`
 
 function Sort() {
     const page = useRecoilValue(pageState);
+    const [latest, setLatest] = useRecoilState(latestState);
+    const [price, setPrice] = useRecoilState(priceOrderState);
+    const [status, setStatus] = useRecoilState(statusState);
+
+    const toggleLatest = () => {
+        setLatest(prev => prev === 'desc' ? 'asc' : 'desc');
+    };
+
+    const togglePrice = () => {
+        setPrice(prev => prev === 'desc' ? 'asc' : 'desc');
+    };
+
+    const toggleStatus = () => {
+        setStatus(prev => prev === 'desc' ? 'asc' : 'desc');
+    };
 
     return (
         <>
@@ -59,10 +74,20 @@ function Sort() {
             </CategoriTitle>
             <SortHr />
             <Sorted>
-                <SortStyle1>
+                <SortStyle1 onClick={() => {
+                    if (page === 0 || page !== 1) {
+                        toggleLatest();
+                    }
+                }}>
                     {page === 0 ? '최신' : page === 1 ? '수량' : '최신'}
                 </SortStyle1>
-                <SortStyle2>
+                <SortStyle2 onClick={() => {
+                    if (page === 0) {
+                        togglePrice();
+                    } else if (page !== 1) {
+                        toggleStatus();
+                    }
+                }}>
                     {page === 0 ? '가격' : page === 1 ? '가격' : '상태'}
                 </SortStyle2>
             </Sorted>

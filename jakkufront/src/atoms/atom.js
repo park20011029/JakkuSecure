@@ -39,3 +39,42 @@ export const currentState = atom({
     key: 'currentPage',
     default: 1,
 })
+
+export const latestState = atom({
+    key: 'latestState',
+    default: 'desc',
+})
+
+export const priceOrderState = atom({
+    key: 'priceOrderState',
+    default: 'asc',
+})
+
+export const statusState = atom({
+    key: 'statusState',
+    default: 'asc',
+})
+
+export const searchNameState = atom({
+    key: 'searchNameState',
+    default: null,
+})
+
+const localStorageEffect = key => ({ setSelf, onSet }) => {
+    const savedValue = localStorage.getItem(key);
+    if (savedValue != null) {
+        setSelf(JSON.parse(savedValue));
+    }
+
+    onSet(newValue => {
+        localStorage.setItem(key, JSON.stringify(newValue));
+    });
+};
+
+export const tryCounter = atom({
+    key: 'tryCount',
+    default: 0,
+    effects_UNSTABLE: [
+        localStorageEffect('tryCount')
+    ],
+});
